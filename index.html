@@ -2,274 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clifton's On Main | Barbershop — Abingdon, VA</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clifton On Main Barber Shop</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav__logo">
-      <span class="nav__logo-top">CLIFTON'S</span>
-      <span class="nav__logo-bottom">ON MAIN</span>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Clifton On Main</h1>
+      <p>Fresh Cuts. Clean Fades. Sharp Looks Every Time.</p>
+      <a href="#contact" class="btn">Book Appointment</a>
     </div>
-    <ul class="nav__links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#hours">Hours</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="tel:+12766083772" class="nav__cta">Call to Book</a>
-    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="#services" class="mobile-link">Services</a></li>
-      <li><a href="#about" class="mobile-link">About</a></li>
-      <li><a href="#hours" class="mobile-link">Hours</a></li>
-      <li><a href="#contact" class="mobile-link">Contact</a></li>
-      <li><a href="tel:+12766083772" class="mobile-link mobile-link--cta">(276) 608-3772</a></li>
-    </ul>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__bg"></div>
-    <div class="hero__content">
-      <p class="hero__eyebrow">Est. in Abingdon, Virginia</p>
-      <h1 class="hero__title">
-        <span class="hero__title-line">The Cut</span>
-        <span class="hero__title-line hero__title-line--accent">You Deserve.</span>
-      </h1>
-      <p class="hero__sub">272 W Main St, Abingdon, VA &nbsp;·&nbsp; Classic cuts. Straight razor shaves. Real craft.</p>
-      <div class="hero__actions">
-        <a href="tel:+12766083772" class="btn btn--primary">Book an Appointment</a>
-        <a href="#services" class="btn btn--ghost">View Services</a>
-      </div>
-    </div>
-    <div class="hero__scroll-indicator">
-      <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- MARQUEE STRIP -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__inner">
-      <span>Haircuts</span><span class="dot">✦</span>
-      <span>Beard Trims</span><span class="dot">✦</span>
-      <span>Fades</span><span class="dot">✦</span>
-      <span>Straight Razor</span><span class="dot">✦</span>
-      <span>Hot Shave</span><span class="dot">✦</span>
-      <span>Military Cuts</span><span class="dot">✦</span>
-      <span>Kid's Cuts</span><span class="dot">✦</span>
-      <span>Bang Trims</span><span class="dot">✦</span>
-      <span>Haircuts</span><span class="dot">✦</span>
-      <span>Beard Trims</span><span class="dot">✦</span>
-      <span>Fades</span><span class="dot">✦</span>
-      <span>Straight Razor</span><span class="dot">✦</span>
-      <span>Hot Shave</span><span class="dot">✦</span>
-      <span>Military Cuts</span><span class="dot">✦</span>
-      <span>Kid's Cuts</span><span class="dot">✦</span>
-      <span>Bang Trims</span><span class="dot">✦</span>
-    </div>
-  </div>
-
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">What We Offer</span>
-        <h2 class="section-title">Services</h2>
-      </div>
-      <div class="services__grid">
-        <div class="service-card">
-          <div class="service-card__number">01</div>
-          <div class="service-card__icon">✂</div>
-          <h3>Men's Haircut</h3>
-          <p>Classic cuts, tapers, and fades executed with precision. Every head is different — we treat it that way.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-card__number">02</div>
-          <div class="service-card__icon">⚔</div>
-          <h3>Beard Trim & Shape</h3>
-          <p>Clean lines, sculpted shape. Whether you're rocking a full beard or keeping it tight, we've got you.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-card__number">03</div>
-          <div class="service-card__icon">◈</div>
-          <h3>Straight Razor Shave</h3>
-          <p>Hot lather. Straight steel. Neck shave included. A must-try experience that sets us apart.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-card__number">04</div>
-          <div class="service-card__icon">★</div>
-          <h3>Military Haircut</h3>
-          <p>Regulation-ready cuts done right. Respectful, efficient, and clean every time.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-card__number">05</div>
-          <div class="service-card__icon">✦</div>
-          <h3>Kid's Cut</h3>
-          <p>A welcoming shop kids actually enjoy. Friendly chair-side manner and sharp results.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-card__number">06</div>
-          <div class="service-card__icon">—</div>
-          <h3>Bang Trim</h3>
-          <p>Quick, precise fringe maintenance to keep your look fresh between full cuts.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </header>
 
   <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about__image-col">
-      <div class="about__image-block">
-        <div class="about__image-inner"></div>
-        <div class="about__rating">
-          <span class="about__rating-stars">★★★★★</span>
-          <span class="about__rating-text">4.8 on Google</span>
-        </div>
-      </div>
-    </div>
-    <div class="about__text-col">
-      <span class="section-label">About the Shop</span>
-      <h2 class="section-title">Old-Fashioned Craft.<br>Downtown Abingdon.</h2>
-      <p>Clifton's On Main is a neighborhood barbershop with real character. Situated in the heart of downtown Abingdon on Main Street, we offer more than just a haircut — it's a clean environment, real conversation, and a barber who takes his time to get it right.</p>
-      <p>Whether it's your first visit or you've been coming for years, expect the chair to be ready when your appointment is. No waiting around. No rushing through. Just good work done properly.</p>
-      <div class="about__values">
-        <div class="about__value">
-          <span class="about__value-icon">◎</span>
-          <span>Appointment-first, walk-ins welcome</span>
-        </div>
-        <div class="about__value">
-          <span class="about__value-icon">◎</span>
-          <span>Skilled, detail-oriented barbers</span>
-        </div>
-        <div class="about__value">
-          <span class="about__value-icon">◎</span>
-          <span>Clean, comfortable, community shop</span>
-        </div>
-      </div>
-      <a href="tel:+12766083772" class="btn btn--primary">Book Your Cut</a>
+  <section id="about" class="section">
+    <h2>About Us</h2>
+    <p>
+      Welcome to Clifton On Main Barber Shop in Abingdon, VA. We specialize in modern fades,
+      classic cuts, beard trims, and clean professional styles for all ages.
+      Walk in or book ahead — we’ve got you covered.
+    </p>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section dark">
+    <h2>Services</h2>
+
+    <div class="grid">
+      <div class="card">💈 Haircut — $25</div>
+      <div class="card">✂️ Fade — $30</div>
+      <div class="card">🧔 Beard Trim — $15</div>
+      <div class="card">👦 Kids Cut — $20</div>
     </div>
   </section>
 
-  <!-- HOURS & CONTACT -->
-  <section class="info-section" id="hours">
-    <div class="container info-section__grid">
+  <!-- GALLERY -->
+  <section id="gallery" class="section">
+    <h2>Gallery</h2>
 
-      <div class="info-card" id="contact">
-        <span class="section-label">Find Us</span>
-        <h3 class="info-card__title">Location & Contact</h3>
-        <div class="info-card__detail">
-          <span class="info-icon">📍</span>
-          <div>
-            <strong>272 W Main St</strong><br />
-            Abingdon, VA 24210
-          </div>
-        </div>
-        <div class="info-card__detail">
-          <span class="info-icon">📞</span>
-          <div>
-            <a href="tel:+12766083772">(276) 608-3772</a>
-          </div>
-        </div>
-        <div class="info-card__detail">
-          <span class="info-icon">📍</span>
-          <div>Downtown Abingdon, right on Main Street</div>
-        </div>
-        <a href="https://maps.google.com/?q=272+W+Main+St+Abingdon+VA+24210" target="_blank" class="btn btn--outline" style="margin-top:1.5rem">Get Directions</a>
-      </div>
-
-      <div class="info-card">
-        <span class="section-label">When We're Open</span>
-        <h3 class="info-card__title">Hours</h3>
-        <div class="hours-list">
-          <div class="hours-row">
-            <span>Monday</span><span>9:00 AM – 5:00 PM</span>
-          </div>
-          <div class="hours-row">
-            <span>Tuesday</span><span>9:00 AM – 5:00 PM</span>
-          </div>
-          <div class="hours-row">
-            <span>Wednesday</span><span>9:00 AM – 5:00 PM</span>
-          </div>
-          <div class="hours-row">
-            <span>Thursday</span><span>9:00 AM – 5:00 PM</span>
-          </div>
-          <div class="hours-row">
-            <span>Friday</span><span>9:00 AM – 5:00 PM</span>
-          </div>
-          <div class="hours-row hours-row--special">
-            <span>Saturday</span><span>9:00 AM – 2:00 PM</span>
-          </div>
-          <div class="hours-row hours-row--closed">
-            <span>Sunday</span><span>Closed</span>
-          </div>
-        </div>
-      </div>
-
+    <div class="grid">
+      <div class="img-box">Style 1</div>
+      <div class="img-box">Style 2</div>
+      <div class="img-box">Style 3</div>
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">What People Say</span>
-        <h2 class="section-title">Reviews</h2>
-      </div>
-      <div class="testimonials__grid">
-        <div class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p>"Hands down the best experience I've ever had. Cool custom cuts, great conversation and no waiting. When it's your appointment time, the chair is open."</p>
-          <span class="testimonial-card__author">— Google Review</span>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p>"Clifton was excellent. Very professional. He took his time and stayed engaged in conversation the whole cut. Best barber around."</p>
-          <span class="testimonial-card__author">— Google Review</span>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p>"Great place to get a haircut — friendly, skilled barbers who take their time. A cool aesthetic and a pleasant vibe. Highly recommended."</p>
-          <span class="testimonial-card__author">— BestProsInTown</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- CONTACT -->
+  <section id="contact" class="section dark">
+    <h2>Contact</h2>
 
-  <!-- FOOTER CTA -->
-  <section class="footer-cta">
-    <div class="container">
-      <h2>Ready for a fresh cut?</h2>
-      <p>Call to book or walk in during business hours.</p>
-      <a href="tel:+12766083772" class="btn btn--primary btn--large">(276) 608-3772</a>
-    </div>
+    <p>📍 Abingdon, VA</p>
+    <p>📞 (000) 000-0000</p>
+
+    <a class="btn" href="https://maps.google.com" target="_blank">
+      Open in Google Maps
+    </a>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__logo">
-        <span>CLIFTON'S ON MAIN</span>
-        <small>272 W Main St, Abingdon, VA 24210</small>
-      </div>
-      <p class="footer__copy">© 2025 Clifton's On Main. All rights reserved.</p>
-    </div>
+  <footer>
+    <p>© 2026 Clifton On Main Barber Shop. All rights reserved.</p>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!-- JS -->
+  <script src="js/script.js"></script>
 </body>
 </html>
