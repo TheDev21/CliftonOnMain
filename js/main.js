@@ -27,21 +27,43 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   });
 });
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
+/* =========================================
+   SCROLL REVEALS — staggered, word-by-word headings.
+   Content stays visible if JS or IntersectionObserver is unavailable.
+   ========================================= */
+(() => {
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('js-reveal');
+  // split section headings into words
+  document.querySelectorAll('.section-intro h2, .reviews-head h2, .book-intro h2, .about-text h2, .bottom-cta h2').forEach(h => {
+    const walk = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(w => {
+            if (!w.trim()) { frag.appendChild(document.createTextNode(w)); return; }
+            const sp = document.createElement('span'); sp.className = 'word'; sp.innerHTML = `<span>${w}</span>`;
+            frag.appendChild(sp);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+      });
+    };
+    walk(h);
+    h.querySelectorAll('.word > span').forEach((w, i) => (w.style.transitionDelay = `${i * 60}ms`));
+    h.classList.add('reveal-words');
   });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.service-row, .info-block').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(18px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  observer.observe(el);
-});
+  const targets = document.querySelectorAll('.service-row, .info-block, .review-slide, .planner, .about-photo-wrap, .about-checklist li, .reveal-words');
+  targets.forEach(el => {
+    el.classList.add('reveal');
+    const sib = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
+    el.style.setProperty('--d', `${Math.min(sib.indexOf(el), 6) * 70}ms`);
+  });
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+  }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  targets.forEach(el => io.observe(el));
+})();
 
 /* =========================================
    LIVE OPEN / CLOSED STATUS
