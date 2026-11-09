@@ -1422,3 +1422,9 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 @keyframes snip { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-14px); } }
 .section-intro .eyebrow { color: var(--amber-ink); font-size: 0.8rem; }
 [tabindex="-1"]:focus { outline: none; }
+.nav__status { display: none; align-items: center; gap: 0.3rem; margin-left: 0.4rem; font-weight: 700; }
+.nav__status .live-dot { width: 7px; height: 7px; }
+.nav__status.is-open .live-dot { background: #2e9e5b; }
+.nav__status.is-soon .live-dot { background: var(--amber); }
+.nav__status.is-closed .live-dot { background: #d93636; }
+.nav.is-scrolled .nav__status { display: inline-flex; }
