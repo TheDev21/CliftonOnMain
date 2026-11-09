@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thedev21.github.io/CliftonOnMain/sitemap.xml
