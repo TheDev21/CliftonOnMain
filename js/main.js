@@ -714,3 +714,20 @@ renderStatus();
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(run); } }, { passive: true });
   run();
 })();
+
+/* Tactile call feedback on phones: short vibration + "Calling…" toast */
+(() => {
+  const toast = document.createElement('div');
+  toast.className = 'toast'; toast.setAttribute('role', 'status');
+  document.body.appendChild(toast);
+  window.showToast = (msg) => {
+    toast.textContent = msg; toast.classList.add('is-on');
+    clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('is-on'), 2600);
+  };
+  if (!isTouch) return;
+  document.addEventListener('click', e => {
+    if (!e.target.closest('a[href^="tel:"]')) return;
+    try { navigator.vibrate && navigator.vibrate(18); } catch {}
+    showToast("📞 Calling Clifton's On Main…");
+  });
+})();
