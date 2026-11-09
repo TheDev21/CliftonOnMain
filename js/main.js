@@ -418,3 +418,11 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
     else { await navigator.clipboard.writeText(`${data.text} ${data.url}`); b.textContent = '✓ Link copied'; }
   } catch { /* user dismissed */ }
 }));
+
+/* Tab nudge: when the visitor switches tabs, the title invites them back */
+(() => {
+  const original = document.title;
+  document.addEventListener('visibilitychange', () => {
+    document.title = document.hidden ? '✂️ Still need that cut? · Clifton\'s' : original;
+  });
+})();
