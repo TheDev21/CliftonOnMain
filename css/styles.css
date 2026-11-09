@@ -589,3 +589,44 @@ img { display: block; max-width: 100%; }
   margin-left: 0.6rem;
   vertical-align: middle;
 }
+
+/* =========================================
+   MOBILE ACTION BAR
+   ========================================= */
+.action-bar { display: none; }
+@media (max-width: 960px) {
+  .action-bar {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 0.5rem;
+    position: fixed;
+    left: 0.75rem; right: 0.75rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
+    z-index: 120;
+    padding: 0.45rem;
+    background: rgba(28,46,74,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+  .action-bar__btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.15rem;
+    min-height: 54px;
+    font-size: 0.75rem; font-weight: 600; color: #fff;
+    border-radius: 11px;
+    line-height: 1.1;
+  }
+  .action-bar__btn:active { background: rgba(255,255,255,0.12); }
+  .action-bar__btn--call {
+    flex-direction: row; gap: 0.5rem;
+    background: var(--amber);
+    font-size: 0.95rem;
+  }
+  .action-bar__btn .live-dot { width: 10px; height: 10px; margin-bottom: 0.3rem; }
+  .action-bar__btn.is-open .live-dot { background: #3ddc84; }
+  .action-bar__btn.is-soon .live-dot { background: var(--amber-light); }
+  .action-bar__btn.is-closed .live-dot { background: #ff6b6b; }
+  body { padding-bottom: 90px; }
+}

@@ -115,3 +115,12 @@ function renderStatus() {
 }
 renderStatus();
 setInterval(renderStatus, 30000);
+
+/* Short status label for the mobile action bar */
+document.addEventListener('shopstatus', e => {
+  const st = e.detail;
+  document.querySelectorAll('[data-live-short]').forEach(el => {
+    el.textContent = st.open ? (st.closingSoon ? 'Closing soon' : 'Open now') : 'Closed';
+  });
+});
+renderStatus();
