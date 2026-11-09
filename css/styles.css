@@ -1004,3 +1004,22 @@ body::after {
 .hours-row.is-today .hours-bar i { background: var(--amber); opacity: 1; }
 .hours-needle { position: absolute; top: -4px; width: 3px; height: 14px; border-radius: 2px; background: #c8102e; transform: translateX(-50%); box-shadow: 0 0 0 2px var(--cream); }
 .hours-needle::after { content: 'now'; position: absolute; top: -1.2rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; font-weight: 700; color: #c8102e; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* =========================================
+   FAQ
+   ========================================= */
+.faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: start; }
+.faq-list { border-top: 2px solid var(--navy); }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1.25rem 0; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--navy);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-plus { position: relative; width: 18px; height: 18px; flex-shrink: 0; }
+.faq-plus::before, .faq-plus::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--amber); transition: transform 0.3s ease; }
+.faq-plus::after { transform: rotate(90deg); }
+.faq-item[open] .faq-plus::after { transform: rotate(0deg); }
+.faq-item p { padding: 0 0 1.4rem; color: var(--text-muted); max-width: 60ch; animation: faqIn 0.35s ease; }
+@keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } }
+@media (max-width: 960px) { .faq-grid { grid-template-columns: 1fr; gap: 1rem; } .faq-item summary { font-size: 1.1rem; } }
