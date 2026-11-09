@@ -644,3 +644,16 @@ renderStatus();
   m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-close-modal]')) m.close(); });
   m.querySelector('[data-reminder-exit]').addEventListener('click', () => { downloadReminder(); m.close(); });
 })();
+
+/* Magnetic primary buttons on desktop: they lean toward the cursor */
+(() => {
+  if (isTouch || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.btn-primary, .reviews-nav__btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.25, y = (e.clientY - r.top - r.height / 2) * 0.35;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => (btn.style.transform = ''));
+  });
+})();

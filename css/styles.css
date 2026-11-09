@@ -1142,3 +1142,5 @@ html, body { overflow-x: clip; }
 }
 :root[data-theme="dark"] .mobile-menu { background: #0a111c; }
 .exit-modal__text { color: var(--text-muted); margin: -0.5rem 0 1.5rem; }
+.btn-primary { transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s ease; }
+.btn-primary:hover { box-shadow: 0 12px 28px rgba(212,131,26,0.4); }
