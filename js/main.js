@@ -581,3 +581,8 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
     try { sessionStorage.setItem('announceClosed', '1'); } catch {}
   });
 })();
+
+/* Offline-ready + installable (only over http/https) */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}

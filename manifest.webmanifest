@@ -1,0 +1,18 @@
+{
+  "name": "Clifton's On Main",
+  "short_name": "Clifton's",
+  "description": "Barbershop on Main Street in Abingdon, VA. Call (276) 608-3772 to book.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1c2e4a",
+  "theme_color": "#1c2e4a",
+  "icons": [
+    { "src": "img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Call to book", "url": "tel:+12766083772" },
+    { "name": "Plan a visit", "url": "./#book" },
+    { "name": "Hours", "url": "./#hours" }
+  ]
+}
