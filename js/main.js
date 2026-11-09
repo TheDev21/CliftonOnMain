@@ -287,13 +287,12 @@ document.querySelectorAll('[data-copy-phone]').forEach(btn => {
 (() => {
   const rot = document.querySelector('[data-rotator]');
   if (!rot || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const words = [...rot.children];
-  let i = 0;
   setInterval(() => {
-    const cur = words[i];
-    i = (i + 1) % words.length;
+    const words = [...rot.children];
+    const cur = rot.querySelector('.is-active') || words[0];
+    const next = words[(words.indexOf(cur) + 1) % words.length];
     cur.classList.remove('is-active'); cur.classList.add('is-leaving');
-    words[i].classList.remove('is-leaving'); words[i].classList.add('is-active');
+    next.classList.remove('is-leaving'); next.classList.add('is-active');
     setTimeout(() => cur.classList.remove('is-leaving'), 600);
   }, 2200);
 })();
