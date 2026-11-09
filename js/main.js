@@ -240,3 +240,21 @@ document.querySelectorAll('[data-copy-phone]').forEach(btn => {
     setTimeout(() => cur.classList.remove('is-leaving'), 600);
   }, 2200);
 })();
+
+/* When closed, the reminder replaces "See Our Hours" to keep the hero focused */
+document.addEventListener('shopstatus', e => {
+  document.querySelectorAll('[data-hours-btn]').forEach(b => (b.hidden = !e.detail.open));
+});
+renderStatus();
+
+/* Barber pole spins on the logo while the page scrolls */
+(() => {
+  const mark = document.querySelector('.nav__logo-mark');
+  if (!mark || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let t;
+  addEventListener('scroll', () => {
+    mark.classList.add('is-spinning');
+    clearTimeout(t);
+    t = setTimeout(() => mark.classList.remove('is-spinning'), 400);
+  }, { passive: true });
+})();

@@ -694,4 +694,19 @@ img { display: block; max-width: 100%; }
 }
 .hero__rotator > span.is-active { opacity: 1; transform: none; }
 .hero__rotator > span.is-leaving { opacity: 0; transform: translateY(-0.4em) rotateX(60deg); }
-.hero__heading-sub { font-size: 0.42em; font-weight: 400; letter-spacing: 0; opacity: 0.85; display: inline-block; margin-top: 0.5rem; }
+.hero__heading-sub { display: block; font-size: 0.4em; font-weight: 400; letter-spacing: 0; opacity: 0.85; margin-top: 0.75rem; line-height: 1.1; }
+
+/* =========================================
+   BARBER POLE LOGO MARK
+   ========================================= */
+.nav__logo-mark { position: relative; overflow: hidden; isolation: isolate; }
+.nav__logo-mark .pole {
+  position: absolute; inset: -50%;
+  background: repeating-linear-gradient(45deg, #c8102e 0 6px, #fff 6px 12px, #1c2e4a 12px 18px, #fff 18px 24px);
+  opacity: 0; transition: opacity 0.3s ease;
+  animation: poleSpin 1.2s linear infinite;
+  z-index: -1;
+}
+.nav__logo-letter { position: relative; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+.nav__brand:hover .pole, .nav__logo-mark.is-spinning .pole { opacity: 1; }
+@keyframes poleSpin { to { transform: translateY(33.94px); } }
