@@ -949,3 +949,19 @@ img { display: block; max-width: 100%; }
 :root[data-theme="dark"] .btn-outline:hover { color: #0f1724; }
 :root[data-theme="dark"] .action-bar { background: rgba(10,17,28,0.92); }
 :root[data-theme="dark"] .bottom-cta .btn-primary { background: #0f1724; border-color: #0f1724; color: #fff; }
+
+/* =========================================
+   ACCESSIBILITY
+   ========================================= */
+.skip-link {
+  position: fixed; top: 0.75rem; left: 0.75rem; z-index: 300;
+  background: var(--amber); color: #fff; font-weight: 700; padding: 0.7rem 1.1rem; border-radius: 8px;
+  transform: translateY(-200%); transition: transform 0.2s ease;
+}
+.skip-link:focus { transform: none; }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+section[id], [id="contact"] { scroll-margin-top: calc(var(--nav-h) + 1rem); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  html { scroll-behavior: auto; }
+}
