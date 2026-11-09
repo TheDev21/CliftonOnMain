@@ -953,3 +953,19 @@ document.querySelectorAll('.service-row').forEach(row => {
   new IntersectionObserver(([en]) => { visible = en.isIntersecting; paint(); }, { threshold: 0.25 }).observe(planner);
   planner.addEventListener('change', paint);
 })();
+
+/* "Add to home screen": the shop becomes an app icon next to their other apps */
+(() => {
+  const btn = document.getElementById('installBtn');
+  if (!btn) return;
+  let deferred;
+  addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; btn.hidden = false; });
+  const iOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const standalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
+  if (iOS && !standalone) btn.hidden = false;
+  btn.addEventListener('click', async () => {
+    if (deferred) { deferred.prompt(); await deferred.userChoice; deferred = null; btn.hidden = true; track('install'); }
+    else if (iOS) showToast('Tap Share, then "Add to Home Screen"');
+  });
+  addEventListener('appinstalled', () => (btn.hidden = true));
+})();
