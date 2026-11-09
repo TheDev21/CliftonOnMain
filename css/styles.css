@@ -1156,3 +1156,19 @@ html, body { overflow-x: clip; }
 .badge-spin text { fill: #1c2e4a; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (max-width: 960px) { .badge-spin { right: 0.75rem; bottom: -2rem; width: 110px; height: 110px; } }
+
+/* How it works */
+.steps { padding: 5rem 0 2rem; }
+.steps-list { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; counter-reset: s; position: relative; }
+.steps-list::before { content: ''; position: absolute; top: 1.5rem; left: 1.5rem; right: 12%; height: 2px; background: repeating-linear-gradient(90deg, var(--amber) 0 8px, transparent 8px 16px); }
+.steps-list li { position: relative; }
+.steps-num { position: relative; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; box-shadow: 0 0 0 6px var(--cream); }
+:root[data-theme="dark"] .steps-num { background: var(--amber); color: #111; }
+.steps-list h3 { font-family: var(--font-heading); font-size: 1.3rem; color: var(--navy); margin-bottom: 0.35rem; }
+.steps-list p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+@media (max-width: 860px) {
+  .steps-list { grid-template-columns: 1fr; gap: 1.5rem; }
+  .steps-list::before { top: 1.5rem; bottom: 1.5rem; left: 1.45rem; right: auto; width: 2px; height: auto; background: repeating-linear-gradient(180deg, var(--amber) 0 8px, transparent 8px 16px); }
+  .steps-list li { padding-left: 4.25rem; }
+  .steps-num { position: absolute; left: 0; top: 0; }
+}

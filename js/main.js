@@ -53,7 +53,7 @@ document.querySelectorAll('.mobile-link').forEach(link => {
     h.querySelectorAll('.word > span').forEach((w, i) => (w.style.transitionDelay = `${i * 60}ms`));
     h.classList.add('reveal-words');
   });
-  const targets = document.querySelectorAll('.service-row, .info-block, .review-slide, .planner, .about-photo-wrap, .about-checklist li, .reveal-words');
+  const targets = document.querySelectorAll('.service-row, .info-block, .review-slide, .planner, .about-photo-wrap, .about-checklist li, .steps-list li, .stat, .faq-item, .reveal-words');
   targets.forEach(el => {
     el.classList.add('reveal');
     const sib = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
