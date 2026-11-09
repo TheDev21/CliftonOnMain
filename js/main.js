@@ -920,3 +920,18 @@ document.querySelectorAll('.service-row').forEach(row => {
     hero.style.setProperty('--my', `${e.clientY - r.top}px`);
   });
 })();
+
+/* FAQ deep links: /#faq-kids opens that answer; opening one updates the URL for sharing */
+(() => {
+  const openFromHash = () => {
+    const el = location.hash && document.querySelector(location.hash);
+    if (el && el.matches('details.faq-item')) { el.open = true; el.scrollIntoView({ block: 'center' }); }
+  };
+  addEventListener('hashchange', openFromHash); openFromHash();
+  document.querySelectorAll('details.faq-item').forEach(d => d.addEventListener('toggle', () => {
+    if (d.open) {
+      history.replaceState(null, '', '#' + d.id);
+      document.querySelectorAll('details.faq-item[open]').forEach(o => { if (o !== d) o.open = false; });
+    }
+  }));
+})();
