@@ -1369,3 +1369,10 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
   background: radial-gradient(520px circle at var(--mx, 70%) var(--my, 40%), rgba(240,168,48,0.14), transparent 60%);
   transition: background 0.1s linear;
 }
+
+/* Highlighter marks on the review phrases that matter */
+.review-slide mark {
+  color: inherit; background: linear-gradient(transparent 58%, rgba(240,168,48,0.45) 58%) no-repeat;
+  background-size: 0% 100%; transition: background-size 1s cubic-bezier(.2,.8,.2,1) 0.3s;
+}
+.review-slide.is-in mark, .review-slide:hover mark, html:not(.js-reveal) .review-slide mark { background-size: 100% 100%; }
