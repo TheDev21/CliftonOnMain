@@ -1322,3 +1322,26 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 
 /* Performance: skip rendering work for far-below-the-fold sections until needed */
 .faq-grid, .stats, #reviews, .about-section, .footer { content-visibility: auto; contain-intrinsic-size: auto 700px; }
+
+/* =========================================
+   CONTRAST (WCAG AA) — bright amber keeps navy text,
+   small amber text on light backgrounds uses a deeper "ink" amber
+   ========================================= */
+:root { --amber-ink: #9c5508; }
+:root[data-theme="dark"] { --amber-ink: #f0a830; }
+.btn-primary, .btn-primary:hover, .action-bar__btn--call, .chips input:checked + span,
+.service-row:hover .service-row__cta, .announce, .skip-link, .hours-row.is-today span:first-child::after { color: #1c2e4a; }
+.announce a { color: #1c2e4a; }
+.announce__close { color: #1c2e4a; background: rgba(28,46,74,0.12); }
+.eyebrow, .call-modal__eyebrow, .service-row__num, .service-row__cta, .info-row a, .nav__phone { color: var(--amber-ink); }
+.nav.is-top .nav__phone { color: var(--amber-light); }
+.service-row:hover .service-row__num, .service-row:focus-within .service-row__num { color: var(--amber-light); }
+.bottom-cta, .bottom-cta p, .bottom-cta__eyebrow, .bottom-cta .link-btn { color: #1c2e4a; }
+.bottom-cta__number span:first-child, .bottom-cta__number span:last-child { color: #1c2e4a; }
+.bottom-cta__number:hover span { color: #fff; }
+.bottom-cta__status { color: #fff; background: #1c2e4a; }
+.footer-bottom { color: rgba(255,255,255,0.62); }
+.due-card .eyebrow, .book-intro .eyebrow { color: var(--amber-ink); }
+.due-card .eyebrow { color: var(--amber-light); }
+.ticker { color: #1c2e4a; }
+:root[data-theme="dark"] .bottom-cta, :root[data-theme="dark"] .bottom-cta p { color: #1c2e4a; }
