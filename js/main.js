@@ -900,3 +900,12 @@ document.addEventListener('shopstatus', e => {
   document.getElementById('todayMeter').style.width = `${pct * 100}%`;
 });
 renderStatus();
+
+/* Whole service row is a target: click anywhere on it to plan that service */
+document.querySelectorAll('.service-row').forEach(row => {
+  row.style.cursor = 'pointer';
+  row.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    row.querySelector('[data-pick-service]')?.click();
+  });
+});
