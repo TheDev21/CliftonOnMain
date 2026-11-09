@@ -1101,3 +1101,11 @@ body::after {
 .ticker:hover .ticker__track { animation-play-state: paused; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 html, body { overflow-x: clip; }
+
+/* Stats band */
+.stats { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+.stat { border-left: 2px solid var(--amber); padding-left: 1.25rem; }
+.stat strong { display: block; font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1; color: var(--navy); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.stat span { display: block; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.4; }
+@media (max-width: 760px) { .stats-grid { grid-template-columns: 1fr 1fr; } }

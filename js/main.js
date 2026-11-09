@@ -588,3 +588,24 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
 }
 document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());
 renderStatus();
+
+/* Count-up stats when they scroll into view */
+(() => {
+  const els = document.querySelectorAll('[data-count]');
+  if (!els.length || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    io.unobserve(en.target);
+    const el = en.target, end = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0);
+    if (!end) return;
+    const t0 = performance.now(), dur = 1400;
+    const step = now => {
+      const p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (end * e).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    el.textContent = (0).toFixed(dec);
+    requestAnimationFrame(step);
+  }), { threshold: 0.6 });
+  els.forEach(el => io.observe(el));
+})();
