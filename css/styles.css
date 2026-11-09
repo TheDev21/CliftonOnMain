@@ -1476,3 +1476,4 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 }
 @keyframes shine { from { background-position: 100% 0; } to { background-position: -40% 0; } }
 @media (prefers-reduced-motion: reduce) { .hero__shine { animation: none; color: #fff; background: none; } }
+.hero__greet { color: var(--amber-light); font-weight: 600; }

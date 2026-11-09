@@ -1095,3 +1095,12 @@ document.addEventListener('click', e => {
 })();
 /* Printing adds a scan-to-call QR to the card */
 addEventListener('beforeprint', () => drawQr('printQr', 'tel:' + SHOP.tel));
+
+/* Time-of-day greeting in the shop's own time */
+(() => {
+  const loc = document.querySelector('.hero__location');
+  if (!loc) return;
+  const h = Math.floor(shopNow().mins / 60);
+  const g = h < 5 ? 'Hello, night owl' : h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  loc.insertAdjacentHTML('beforeend', ` <span class="hero__greet">· ${g} from Main Street</span>`);
+})();
