@@ -36,7 +36,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08 });
 
-document.querySelectorAll('.service-row, .review-card, .info-block').forEach(el => {
+document.querySelectorAll('.service-row, .info-block').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(18px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -366,4 +366,29 @@ document.querySelectorAll('[data-load-map]').forEach(btn => btn.addEventListener
     ? 'https://maps.apple.com/?daddr=272+W+Main+St,+Abingdon,+VA+24210'
     : 'https://www.google.com/maps/dir/?api=1&destination=272+W+Main+St,+Abingdon,+VA+24210';
   document.querySelectorAll('a[href^="https://maps.google.com"]').forEach(a => (a.href = href));
+})();
+
+/* Reviews carousel: arrows, dots, gentle auto-advance (pauses on interaction) */
+(() => {
+  const track = document.getElementById('reviewsTrack');
+  if (!track) return;
+  const slides = [...track.children];
+  const dots = document.getElementById('reviewsDots');
+  slides.forEach(() => dots.appendChild(document.createElement('span')));
+  let idx = 0, paused = false;
+  const go = i => {
+    idx = (i + slides.length) % slides.length;
+    track.scrollTo({ left: slides[idx].offsetLeft - slides[0].offsetLeft });
+  };
+  document.querySelectorAll('[data-rev]').forEach(b => b.addEventListener('click', () => { paused = true; go(idx + +b.dataset.rev); }));
+  track.addEventListener('scroll', () => {
+    const i = Math.round(track.scrollLeft / (slides[1].offsetLeft - slides[0].offsetLeft));
+    idx = Math.min(i, slides.length - 1);
+    [...dots.children].forEach((d, n) => d.classList.toggle('is-active', n === idx));
+  }, { passive: true });
+  ['pointerdown', 'focusin', 'mouseenter'].forEach(ev => track.addEventListener(ev, () => (paused = true)));
+  track.dispatchEvent(new Event('scroll'));
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => { if (!paused && !document.hidden) go(idx + 1); }, 6000);
+  }
 })();

@@ -860,3 +860,46 @@ img { display: block; max-width: 100%; }
 .map-embed__pin { font-size: 2.2rem; animation: bob 1.6s ease-in-out infinite; }
 @keyframes bob { 50% { transform: translateY(-6px); } }
 .map-embed__load:hover span:last-child { text-decoration: underline; }
+
+/* =========================================
+   REVIEWS — pull-quote carousel
+   ========================================= */
+#reviews { overflow: hidden; }
+.reviews-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 2.5rem; }
+.reviews-head h2 { font-family: var(--font-heading); font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; color: var(--navy); }
+.reviews-nav { display: flex; gap: 0.5rem; }
+.reviews-nav__btn {
+  width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid var(--navy);
+  background: transparent; color: var(--navy); font-size: 1.2rem; cursor: pointer; transition: all 0.2s ease;
+}
+.reviews-nav__btn:hover { background: var(--navy); color: #fff; }
+.reviews-track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(78%, 760px);
+  gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  padding-bottom: 1rem; scrollbar-width: none; outline: none;
+}
+.reviews-track::-webkit-scrollbar { display: none; }
+.review-slide {
+  scroll-snap-align: start;
+  background: #fff; border-radius: 24px; padding: 2.75rem 2.5rem 2.25rem; position: relative;
+  border: 1px solid var(--border);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.review-slide::before {
+  content: '\201C'; position: absolute; top: -0.15em; right: 0.25em;
+  font-family: var(--font-heading); font-size: 9rem; line-height: 1; color: var(--amber); opacity: 0.18;
+}
+.review-slide blockquote {
+  font-family: var(--font-heading); font-size: clamp(1.25rem, 2.3vw, 1.75rem); line-height: 1.35;
+  color: var(--navy); font-weight: 400; margin: 0.75rem 0 1.5rem;
+}
+.review-slide figcaption { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+.review-slide figcaption::before { content: '— '; }
+.reviews-dots { display: flex; gap: 0.4rem; justify-content: center; margin-top: 1rem; }
+.reviews-dots span { width: 8px; height: 8px; border-radius: 99px; background: var(--border); transition: all 0.3s ease; }
+.reviews-dots span.is-active { width: 28px; background: var(--amber); }
+@media (max-width: 580px) {
+  .reviews-track { grid-auto-columns: 88%; }
+  .review-slide { padding: 2rem 1.5rem 1.5rem; }
+  .reviews-nav { display: none; }
+}

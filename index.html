@@ -236,26 +236,34 @@
   <!-- REVIEWS -->
   <section class="section bg-light" id="reviews">
     <div class="container">
-      <div class="section-intro">
-        <h2>What our customers say</h2>
-      </div>
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Hands down the best experience I've ever had. No waiting — when it's your appointment time, the chair is open. Cool custom cuts and great conversation."</p>
-          <span class="review-author">— Google Review</span>
+      <div class="reviews-head">
+        <div>
+          <p class="eyebrow">4.8 ★ on Google</p>
+          <h2>Don't take our word for it.</h2>
         </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Very professional. He took his time with my stepson's fade and stayed engaged in conversation the whole time. Best barber around — we won't go anywhere else."</p>
-          <span class="review-author">— Google Review</span>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Friendly and skilled barbers who take their time. Cool aesthetic and a great vibe — perfect for kids' cuts and beard trims. Highly recommended."</p>
-          <span class="review-author">— BestProsInTown</span>
+        <div class="reviews-nav">
+          <button type="button" class="reviews-nav__btn" data-rev="-1" aria-label="Previous review">←</button>
+          <button type="button" class="reviews-nav__btn" data-rev="1" aria-label="Next review">→</button>
         </div>
       </div>
+      <div class="reviews-track" id="reviewsTrack" tabindex="0" aria-label="Customer reviews">
+        <figure class="review-slide">
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"Hands down the best experience I've ever had. No waiting — when it's your appointment time, the chair is open. Cool custom cuts and great conversation."</blockquote>
+          <figcaption>Google Review</figcaption>
+        </figure>
+        <figure class="review-slide">
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"Very professional. He took his time with my stepson's fade and stayed engaged in conversation the whole time. Best barber around — we won't go anywhere else."</blockquote>
+          <figcaption>Google Review</figcaption>
+        </figure>
+        <figure class="review-slide">
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"Friendly and skilled barbers who take their time. Cool aesthetic and a great vibe — perfect for kids' cuts and beard trims. Highly recommended."</blockquote>
+          <figcaption>BestProsInTown</figcaption>
+        </figure>
+      </div>
+      <div class="reviews-dots" id="reviewsDots" aria-hidden="true"></div>
     </div>
   </section>
 
