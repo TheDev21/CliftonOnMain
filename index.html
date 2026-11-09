@@ -76,6 +76,8 @@
     <button type="button" class="announce__close" aria-label="Dismiss">×</button>
   </div>
 
+  <noscript><style>.intro{display:none}.live-status .live-dot{display:none}</style></noscript>
+
   <!-- NAV -->
   <nav class="nav is-top" id="nav">
     <div class="nav__brand">
@@ -126,12 +128,12 @@
            srcset="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=70&auto=format 800w,
                    https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&q=75&auto=format 1600w,
                    https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=2400&q=75&auto=format 2400w"
-           sizes="100vw" alt="" fetchpriority="high" decoding="async" />
+           sizes="100vw" alt="" fetchpriority="high" decoding="async" onerror="this.remove()" />
     </div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <p class="hero__location">📍 Downtown Abingdon, Virginia</p>
-      <p class="live-status" data-live-status aria-live="polite"><span class="live-dot"></span><span data-live-text>Checking hours…</span></p>
+      <p class="live-status" data-live-status aria-live="polite"><span class="live-dot"></span><span data-live-text>Mon–Fri 9–5 · Sat 9–2</span></p>
       <p class="hero__weather" id="heroWeather" hidden></p>
       <a href="#book" class="welcome-back" id="welcomeBack" hidden></a>
       <h1 class="hero__heading">
