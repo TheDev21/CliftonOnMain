@@ -258,3 +258,32 @@ renderStatus();
     t = setTimeout(() => mark.classList.remove('is-spinning'), 400);
   }, { passive: true });
 })();
+
+/* =========================================
+   NAV STATE: transparent over hero, solid after; scrollspy
+   ========================================= */
+(() => {
+  const hero = document.querySelector('.hero');
+  const setNav = () => {
+    const top = scrollY < (hero ? hero.offsetHeight - 90 : 10);
+    nav.classList.toggle('is-top', top && !menuOpen);
+    nav.classList.toggle('is-scrolled', !top);
+  };
+  addEventListener('scroll', setNav, { passive: true });
+  hamburger.addEventListener('click', () => {
+    setNav();
+    hamburger.setAttribute('aria-expanded', String(menuOpen));
+    hamburger.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) hamburger.click(); });
+  setNav();
+
+  const links = [...document.querySelectorAll('.nav__links a')];
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + en.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  links.forEach(l => { const t = document.querySelector(l.getAttribute('href')); if (t) spy.observe(t); });
+})();

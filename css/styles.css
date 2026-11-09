@@ -26,6 +26,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 
 body {
@@ -710,3 +711,27 @@ img { display: block; max-width: 100%; }
 .nav__logo-letter { position: relative; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
 .nav__brand:hover .pole, .nav__logo-mark.is-spinning .pole { opacity: 1; }
 @keyframes poleSpin { to { transform: translateY(33.94px); } }
+
+/* =========================================
+   NAV: glass over hero, solid on scroll, scrollspy
+   ========================================= */
+.nav { transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, height 0.35s ease; }
+.nav.is-top {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+.nav.is-top .nav__name, .nav.is-top .nav__links a { color: #fff; }
+.nav.is-top .nav__tagline { color: rgba(255,255,255,0.7); }
+.nav.is-top .nav__logo-mark { background: rgba(255,255,255,0.15); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); }
+.nav.is-top .nav__phone { color: var(--amber-light); }
+.nav.is-top .nav__hamburger span { background: #fff; }
+.nav.is-scrolled { background: rgba(255,255,255,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.nav__links a { position: relative; }
+.nav__links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+  background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+}
+.nav__links a:hover::after, .nav__links a.is-active::after { transform: scaleX(1); }
+.nav__links a.is-active { color: var(--navy); }
+.nav.is-top .nav__links a.is-active { color: #fff; }
