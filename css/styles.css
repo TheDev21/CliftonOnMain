@@ -1381,3 +1381,5 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .install-btn:hover { background: rgba(255,255,255,0.16); }
 .save-data .about-photo { background-image: linear-gradient(135deg, #2a4166, #14213a); }
 .hours-date { font-weight: 400; color: var(--text-muted); font-size: 0.8rem; margin-left: 0.35rem; }
+.confetti { position: fixed; top: -40px; z-index: 600; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
