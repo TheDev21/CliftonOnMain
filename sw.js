@@ -1,6 +1,6 @@
 /* Offline support: the site still opens (hours, phone, address) with no signal. */
 const CACHE = 'cliftons-v1';
-const CORE = ['./', './index.html', './css/styles.css', './js/main.js', './img/favicon.svg', './manifest.webmanifest'];
+const CORE = ['./', './index.html', './css/styles.css', './js/main.js', './img/favicon.svg', './manifest.webmanifest', './js/vendor/qrcode.js'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));

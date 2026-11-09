@@ -246,7 +246,7 @@ let qrLoaded = false;
 function withQr(cb) {
   if (window.qrcode) return cb();
   const s = document.createElement('script');
-  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+  s.src = 'js/vendor/qrcode.js'; // qrcode-generator 1.4.4, MIT, self-hosted
   s.onload = cb;
   s.onerror = () => document.querySelectorAll('.call-modal__qr:empty').forEach(el => (el.textContent = '📱'));
   document.head.appendChild(s);
