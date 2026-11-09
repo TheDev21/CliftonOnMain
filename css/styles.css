@@ -1141,3 +1141,4 @@ html, body { overflow-x: clip; }
   body.menu-locked .action-bar { display: none; }
 }
 :root[data-theme="dark"] .mobile-menu { background: #0a111c; }
+.exit-modal__text { color: var(--text-muted); margin: -0.5rem 0 1.5rem; }

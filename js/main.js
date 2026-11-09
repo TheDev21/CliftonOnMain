@@ -621,3 +621,20 @@ document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click
   hamburger.setAttribute('aria-expanded', 'false');
 }));
 renderStatus();
+
+/* Exit intent (desktop only, once per session, after 15s on page):
+   offer to save the number instead of losing the visitor. */
+(() => {
+  const m = document.getElementById('exitModal');
+  if (!m || isTouch) return;
+  let armed = false;
+  setTimeout(() => (armed = true), 15000);
+  document.addEventListener('mouseout', e => {
+    if (!armed || e.relatedTarget || e.clientY > 10) return;
+    try { if (sessionStorage.getItem('exitShown')) return; sessionStorage.setItem('exitShown', '1'); } catch {}
+    if (document.querySelector('dialog[open]')) return;
+    m.showModal();
+  });
+  m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-close-modal]')) m.close(); });
+  m.querySelector('[data-reminder-exit]').addEventListener('click', () => { downloadReminder(); m.close(); });
+})();
