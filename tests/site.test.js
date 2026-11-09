@@ -64,3 +64,43 @@ test('deep link prefills the planner', () => at('2026-11-10T10:00:00-05:00', asy
   const t = await p.textContent('#plannerScript');
   assert.match(t, /kid's cut tomorrow whenever you have an opening/);
 }, PAGE + '?service=kids&day=tomorrow&time=any'));
+
+test('due-date calculator never lands on a Sunday', () => at('2026-11-10T10:00:00-05:00', async p => {
+  for (const [style, ago] of [['14', '0'], ['25', '7'], ['10', '0'], ['28', '14']]) {
+    const txt = await p.evaluate(([s, a]) => {
+      const f = document.getElementById('dueForm');
+      f.querySelector('[name=style]').value = s; f.querySelector('[name=ago]').value = a;
+      f.dispatchEvent(new Event('change'));
+      return document.getElementById('dueResult').textContent;
+    }, [style, ago]);
+    assert.doesNotMatch(txt, /Sunday/, txt);
+  }
+}));
+
+test('Google Calendar reminder targets 9:10 AM shop time', () => at('2026-11-10T19:00:00-05:00', async p => {
+  const href = await p.evaluate(() => googleCalUrl());
+  assert.match(href, /dates=20261111T141000Z/); // Wed 9:10 AM EST = 14:10 UTC
+}));
+
+test('contacts card carries phone and address', () => at('2026-11-10T10:00:00-05:00', async p => {
+  const vcf = await p.evaluate(async () => {
+    let blob; const orig = URL.createObjectURL; URL.createObjectURL = b => { blob = b; return orig(b); };
+    document.querySelector('[data-save-contact]').click();
+    return blob.text();
+  });
+  assert.match(vcf, /TEL;TYPE=WORK,VOICE:\+12766083772/);
+  assert.match(vcf, /272 W Main St;Abingdon;VA;24210/);
+}));
+
+test('no duplicate element ids', () => at('2026-11-10T10:00:00-05:00', async p => {
+  const dupes = await p.evaluate(() => {
+    const ids = [...document.querySelectorAll('[id]')].map(e => e.id);
+    return ids.filter((id, i) => ids.indexOf(id) !== i);
+  });
+  assert.deepEqual(dupes, []);
+}));
+
+test('every tel: link uses the shop number', () => at('2026-11-10T10:00:00-05:00', async p => {
+  const bad = await p.$$eval('a[href^="tel:"]', as => as.map(a => a.getAttribute('href')).filter(h => h !== 'tel:+12766083772'));
+  assert.deepEqual(bad, []);
+}));
