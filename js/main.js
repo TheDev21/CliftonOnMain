@@ -657,3 +657,25 @@ renderStatus();
     btn.addEventListener('mouseleave', () => (btn.style.transform = ''));
   });
 })();
+
+/* Light parallax: hero copy drifts up and fades, about photo floats */
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const heroC = document.querySelector('.hero__content');
+  const photo = document.querySelector('.about-photo');
+  let ticking = false;
+  const run = () => {
+    const y = scrollY;
+    if (heroC && y < innerHeight) {
+      heroC.style.transform = `translateY(${y * 0.25}px)`;
+      heroC.style.opacity = String(1 - y / (innerHeight * 0.9));
+    }
+    if (photo) {
+      const r = photo.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < innerHeight) photo.style.transform = `translateY(${(r.top + r.height / 2 - innerHeight / 2) * -0.08}px) scale(1.08)`;
+    }
+    ticking = false;
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(run); } }, { passive: true });
+  run();
+})();
