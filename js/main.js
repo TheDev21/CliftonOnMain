@@ -287,3 +287,16 @@ renderStatus();
   }, { rootMargin: '-45% 0px -50% 0px' });
   links.forEach(l => { const t = document.querySelector(l.getAttribute('href')); if (t) spy.observe(t); });
 })();
+
+/* Scroll progress */
+(() => {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  const update = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+  };
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();

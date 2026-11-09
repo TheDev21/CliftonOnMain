@@ -735,3 +735,15 @@ img { display: block; max-width: 100%; }
 .nav__links a:hover::after, .nav__links a.is-active::after { transform: scaleX(1); }
 .nav__links a.is-active { color: var(--navy); }
 .nav.is-top .nav__links a.is-active { color: #fff; }
+
+/* Scroll progress: a barber stripe that fills as you read */
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 200; pointer-events: none; }
+.scroll-progress span {
+  display: block; height: 100%; width: 100%;
+  transform: scaleX(0); transform-origin: left;
+  background: repeating-linear-gradient(-45deg, #c8102e 0 8px, #fff 8px 16px, var(--navy) 16px 24px, #fff 24px 32px);
+  background-size: 45.25px 100%;
+  animation: stripeSlide 1s linear infinite;
+}
+@keyframes stripeSlide { to { background-position: 45.25px 0; } }
+@media (prefers-reduced-motion: reduce) { .scroll-progress span { animation: none; } }
