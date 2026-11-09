@@ -504,10 +504,18 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
     btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
     document.querySelector('meta[name="theme-color"]').content = dark ? '#0f1724' : '#1c2e4a';
   };
-  btn.addEventListener('click', () => {
+  const flip = () => {
     root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
     try { localStorage.setItem('theme', root.dataset.theme); } catch {}
     paint();
+  };
+  btn.addEventListener('click', () => {
+    // Circular "lights on/off" wipe from the toggle, where supported
+    if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) return flip();
+    const r = btn.getBoundingClientRect();
+    root.style.setProperty('--vt-x', `${r.left + r.width / 2}px`);
+    root.style.setProperty('--vt-y', `${r.top + r.height / 2}px`);
+    document.startViewTransition(flip);
   });
   paint();
 })();
