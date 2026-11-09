@@ -911,3 +911,41 @@ img { display: block; max-width: 100%; }
   transition: all 0.2s ease;
 }
 .chip-btn:hover { border-color: var(--navy); background: var(--navy); color: #fff; }
+
+/* =========================================
+   DARK MODE — follows the system, with a manual toggle
+   ========================================= */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border);
+  background: transparent; cursor: pointer; font-size: 1.05rem; display: grid; place-items: center;
+  color: var(--navy); margin-left: 1rem; transition: transform 0.4s ease;
+}
+.theme-toggle:hover { transform: rotate(25deg); }
+.nav.is-top .theme-toggle { border-color: rgba(255,255,255,0.4); color: #fff; }
+.nav__right { display: flex; align-items: center; }
+
+:root[data-theme="dark"] {
+  --cream: #0f1724;
+  --light-bg: #151f30;
+  --warm-white: #1a2538;
+  --text: #e8e6e1;
+  --text-muted: #a9b1bd;
+  --border: #2b3850;
+  --navy: #e9edf5;
+  --navy-mid: #c9d3e6;
+}
+:root[data-theme="dark"] body { background: var(--cream); }
+:root[data-theme="dark"] .nav.is-scrolled, :root[data-theme="dark"] .nav:not(.is-top) { background: rgba(15,23,36,0.9); }
+:root[data-theme="dark"] .nav__logo-mark { background: #1c2e4a; }
+:root[data-theme="dark"] .planner,
+:root[data-theme="dark"] .review-slide,
+:root[data-theme="dark"] .mobile-menu,
+:root[data-theme="dark"] .call-modal { background: #1a2538; }
+:root[data-theme="dark"] .planner legend span { background: var(--amber); }
+:root[data-theme="dark"] .chips input:checked + span { background: var(--amber); border-color: var(--amber); color: #111; }
+:root[data-theme="dark"] .service-row::before { background: #1c2e4a; }
+:root[data-theme="dark"] .about-section,
+:root[data-theme="dark"] .footer { background: #0a111c; }
+:root[data-theme="dark"] .btn-outline:hover { color: #0f1724; }
+:root[data-theme="dark"] .action-bar { background: rgba(10,17,28,0.92); }
+:root[data-theme="dark"] .bottom-cta .btn-primary { background: #0f1724; border-color: #0f1724; color: #fff; }

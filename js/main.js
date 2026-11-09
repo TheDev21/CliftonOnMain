@@ -426,3 +426,22 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
     document.title = document.hidden ? '✂️ Still need that cut? · Clifton\'s' : original;
   });
 })();
+
+/* Theme toggle */
+(() => {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  const root = document.documentElement;
+  const paint = () => {
+    const dark = root.dataset.theme === 'dark';
+    btn.textContent = dark ? '☀' : '☾';
+    btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#0f1724' : '#1c2e4a';
+  };
+  btn.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch {}
+    paint();
+  });
+  paint();
+})();
