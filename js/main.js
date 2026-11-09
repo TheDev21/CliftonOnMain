@@ -300,3 +300,50 @@ renderStatus();
   addEventListener('resize', update);
   update();
 })();
+
+/* =========================================
+   BOOKING PLANNER — turns picks into a one-line call script
+   ========================================= */
+const SERVICE_LABELS = { haircut: "men's haircut", beard: 'beard trim', shave: 'straight razor shave', military: 'military cut', kids: "kid's cut", bang: 'bang trim' };
+(() => {
+  const form = document.getElementById('planner');
+  if (!form) return;
+  const dayWrap = document.getElementById('dayChips');
+  const script = document.getElementById('plannerScript');
+  const { day } = shopNow();
+  let added = 0;
+  for (let i = 0; added < 6 && i < 10; i++) {
+    const d = (day + i) % 7;
+    if (!HOURS[d]) continue;
+    const label = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : DAY_NAMES[d].slice(0, 3);
+    const full = i === 0 ? 'today' : i === 1 ? 'tomorrow' : DAY_NAMES[d];
+    dayWrap.insertAdjacentHTML('beforeend',
+      `<label><input type="radio" name="day" value="${full}" data-dayidx="${d}" ${added === 0 ? 'checked' : ''}><span>${label}${d === 6 ? '<small>till 2</small>' : ''}</span></label>`);
+    added++;
+  }
+  const update = () => {
+    const f = new FormData(form);
+    const svc = SERVICE_LABELS[f.get('service')];
+    const time = f.get('time');
+    const dayVal = f.get('day');
+    const isSat = form.querySelector('input[name="day"]:checked')?.dataset.dayidx === '6';
+    const pm = form.querySelector('input[value="afternoon"]');
+    pm.disabled = isSat;
+    if (isSat && time === 'afternoon') form.querySelector('input[value="midday"]').checked = true;
+    const t = new FormData(form).get('time');
+    const when = t === 'any' ? 'whenever you have an opening' : `in the ${t === 'midday' ? 'middle of the day' : t}`;
+    script.textContent = `"Hi, I'd like to book a ${svc} ${dayVal} ${when}."`;
+  };
+  form.addEventListener('change', update);
+  update();
+  document.getElementById('copyScript').addEventListener('click', async e => {
+    try { await navigator.clipboard.writeText(script.textContent.replace(/"/g, '')); e.target.textContent = 'Copied ✓'; }
+    catch { e.target.textContent = 'Copy failed'; }
+    setTimeout(() => (e.target.textContent = 'Copy request'), 2000);
+  });
+  // "Book this" on a service pre-selects it in the planner
+  document.querySelectorAll('[data-pick-service]').forEach(a => a.addEventListener('click', () => {
+    const r = form.querySelector(`input[name="service"][value="${a.dataset.pickService}"]`);
+    if (r) { r.checked = true; update(); }
+  }));
+})();
