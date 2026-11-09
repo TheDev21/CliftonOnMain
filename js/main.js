@@ -1054,3 +1054,21 @@ document.addEventListener('click', e => {
     h.focus({ preventScroll: true });
   }, 450);
 });
+
+/* Desktop keyboard shortcuts: C = call, B = book, H = hours, D = directions */
+(() => {
+  if (isTouch) return;
+  const go = sel => document.querySelector(sel)?.scrollIntoView({ behavior: 'smooth' });
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.target.matches('input, textarea, select, [contenteditable]') || document.querySelector('dialog[open]')) return;
+    const k = e.key.toLowerCase();
+    if (k === 'c') { loadQr(); callModal?.showModal(); track('call_click', { where: 'shortcut' }); }
+    else if (k === 'b') go('#book');
+    else if (k === 'h') go('#hours');
+    else if (k === 'd') document.querySelector('[data-dir-qr]')?.click();
+  });
+  const hint = document.createElement('p');
+  hint.className = 'kbd-hint';
+  hint.innerHTML = 'Shortcuts: <kbd>C</kbd> call · <kbd>B</kbd> book · <kbd>H</kbd> hours · <kbd>D</kbd> directions';
+  document.querySelector('.footer-bottom')?.appendChild(hint);
+})();
