@@ -501,3 +501,24 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
     })
     .catch(() => {});
 })();
+
+/* =========================================
+   RETURN-VISITOR MEMORY — remembers the last service picked in the
+   planner (this browser only) and greets them with a one-tap rebook.
+   ========================================= */
+(() => {
+  const form = document.getElementById('planner');
+  const wb = document.getElementById('welcomeBack');
+  if (!form || !wb) return;
+  let saved = null;
+  try { saved = localStorage.getItem('lastService'); } catch {}
+  if (saved && SERVICE_LABELS[saved]) {
+    const r = form.querySelector(`input[name="service"][value="${saved}"]`);
+    if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
+    wb.innerHTML = `👋 Welcome back. Book your usual <strong>${SERVICE_LABELS[saved]}</strong> →`;
+    wb.hidden = false;
+  }
+  form.addEventListener('change', e => {
+    if (e.target.name === 'service') try { localStorage.setItem('lastService', e.target.value); } catch {}
+  });
+})();
