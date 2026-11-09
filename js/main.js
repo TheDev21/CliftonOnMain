@@ -66,6 +66,21 @@ document.querySelectorAll('.mobile-link').forEach(link => {
 })();
 
 /* =========================================
+   SHOP DETAILS — the one place to update phone, address and hours
+   for every interactive feature (status, planner, reminders, QR codes,
+   contacts card, maps). Also update the matching text in index.html.
+   ========================================= */
+const SHOP = {
+  name: "Clifton's On Main",
+  tel: '+12766083772',
+  phone: '(276) 608-3772',
+  street: '272 W Main St',
+  city: 'Abingdon', region: 'VA', zip: '24210',
+  get address() { return `${this.street}, ${this.city}, ${this.region} ${this.zip}`; },
+  get mapsQuery() { return encodeURIComponent(this.address); }
+};
+
+/* =========================================
    LIVE OPEN / CLOSED STATUS
    Hours are evaluated in the shop's timezone (America/New_York),
    so a visitor anywhere sees the shop's real status.
@@ -184,8 +199,8 @@ function downloadReminder() {
     `UID:${Date.now()}@cliftonsonmain`, `DTSTAMP:${icsStamp(new Date())}`,
     `DTSTART:${icsStamp(start)}`, `DTEND:${icsStamp(end)}`,
     'SUMMARY:Call Clifton\'s On Main to book a cut',
-    'DESCRIPTION:Call (276) 608-3772 to book. 272 W Main St\\, Abingdon\\, VA 24210',
-    'LOCATION:272 W Main St\\, Abingdon\\, VA 24210',
+    `DESCRIPTION:Call ${SHOP.phone} to book. ${SHOP.address.replace(/,/g, '\\,')}`,
+    `LOCATION:${SHOP.address.replace(/,/g, '\\,')}`,
     'BEGIN:VALARM', 'TRIGGER:PT0M', 'ACTION:DISPLAY', 'DESCRIPTION:Call Clifton\'s On Main', 'END:VALARM',
     'END:VEVENT', 'END:VCALENDAR'
   ].join('\r\n');
@@ -206,7 +221,7 @@ function googleCalUrl() {
   const q = new URLSearchParams({
     action: 'TEMPLATE', text: "Call Clifton's On Main to book a cut",
     dates: `${icsStamp(s)}/${icsStamp(e)}`,
-    details: 'Call (276) 608-3772 to book.', location: '272 W Main St, Abingdon, VA 24210'
+    details: `Call ${SHOP.phone} to book.`, location: SHOP.address
   });
   return 'https://calendar.google.com/calendar/render?' + q;
 }
@@ -260,7 +275,7 @@ function drawQr(elId, data) {
     el.dataset.done = '1';
   });
 }
-function loadQr() { drawQr('callQr', 'tel:+12766083772'); }
+function loadQr() { drawQr('callQr', 'tel:' + SHOP.tel); }
 
 if (callModal && !isTouch) {
   document.addEventListener('click', e => {
@@ -277,8 +292,8 @@ if (callModal && !isTouch) {
 
 document.querySelectorAll('[data-copy-phone]').forEach(btn => {
   btn.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText('(276) 608-3772'); btn.textContent = 'Copied ✓'; }
-    catch { btn.textContent = '(276) 608-3772'; }
+    try { await navigator.clipboard.writeText(SHOP.phone); btn.textContent = 'Copied ✓'; }
+    catch { btn.textContent = SHOP.phone; }
     setTimeout(() => (btn.textContent = 'Copy number'), 2000);
   });
 });
@@ -417,8 +432,8 @@ const SERVICE_LABELS = { haircut: "men's haircut", beard: 'beard trim', shave: '
 /* Click-to-load Google Map: nothing third-party loads until the visitor asks */
 document.querySelectorAll('[data-load-map]').forEach(btn => btn.addEventListener('click', () => {
   const f = document.createElement('iframe');
-  f.src = 'https://www.google.com/maps?q=272+W+Main+St,+Abingdon,+VA+24210&z=17&output=embed';
-  f.title = "Map to Clifton's On Main, 272 W Main St, Abingdon VA";
+  f.src = `https://www.google.com/maps?q=${SHOP.mapsQuery}&z=17&output=embed`;
+  f.title = `Map to ${SHOP.name}, ${SHOP.address}`;
   f.loading = 'lazy';
   f.referrerPolicy = 'no-referrer-when-downgrade';
   f.allowFullscreen = true;
@@ -429,8 +444,8 @@ document.querySelectorAll('[data-load-map]').forEach(btn => btn.addEventListener
 (() => {
   const apple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document;
   const href = apple
-    ? 'https://maps.apple.com/?daddr=272+W+Main+St,+Abingdon,+VA+24210'
-    : 'https://www.google.com/maps/dir/?api=1&destination=272+W+Main+St,+Abingdon,+VA+24210';
+    ? 'https://maps.apple.com/?daddr=' + SHOP.mapsQuery
+    : 'https://www.google.com/maps/dir/?api=1&destination=' + SHOP.mapsQuery;
   document.querySelectorAll('a[href^="https://maps.google.com"]').forEach(a => (a.href = href));
 })();
 
@@ -464,8 +479,8 @@ document.querySelectorAll('[data-save-contact]').forEach(b => b.addEventListener
   const vcf = [
     'BEGIN:VCARD', 'VERSION:3.0',
     "FN:Clifton's On Main", "ORG:Clifton's On Main Barbershop",
-    'TEL;TYPE=WORK,VOICE:+12766083772',
-    'ADR;TYPE=WORK:;;272 W Main St;Abingdon;VA;24210;USA',
+    `TEL;TYPE=WORK,VOICE:${SHOP.tel}`,
+    `ADR;TYPE=WORK:;;${SHOP.street};${SHOP.city};${SHOP.region};${SHOP.zip};USA`,
     'NOTE:Mon–Fri 9 AM–5 PM\\, Sat 9 AM–2 PM\\, Sun closed. Walk-ins welcome.',
     'END:VCARD'
   ].join('\r\n');
@@ -478,7 +493,7 @@ document.querySelectorAll('[data-save-contact]').forEach(b => b.addEventListener
 
 /* Send to a friend: native share sheet on phones, copy link elsewhere */
 document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click', async () => {
-  const data = { title: "Clifton's On Main", text: "Good barbershop on Main Street in Abingdon. (276) 608-3772", url: location.href };
+  const data = { title: SHOP.name, text: `Good barbershop on Main Street in Abingdon. ${SHOP.phone}`, url: location.href };
   try {
     if (navigator.share) await navigator.share(data);
     else { await navigator.clipboard.writeText(`${data.text} ${data.url}`); b.textContent = '✓ Link copied'; }
@@ -763,13 +778,13 @@ setTimeout(() => document.getElementById('intro')?.remove(), 1600);
 
 /* Copy address + desktop "directions to my phone" QR */
 document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText('272 W Main St, Abingdon, VA 24210'); showToast('Address copied ✓'); } catch {}
+  try { await navigator.clipboard.writeText(SHOP.address); showToast('Address copied ✓'); } catch {}
 }));
 (() => {
   const m = document.getElementById('dirModal');
   if (!m) return;
   document.querySelectorAll('[data-dir-qr]').forEach(b => b.addEventListener('click', () => {
-    drawQr('dirQr', 'https://www.google.com/maps/dir/?api=1&destination=272+W+Main+St,+Abingdon,+VA+24210');
+    drawQr('dirQr', 'https://www.google.com/maps/dir/?api=1&destination=' + SHOP.mapsQuery);
     m.showModal();
   }));
   m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-close-modal]')) m.close(); });
@@ -800,7 +815,7 @@ document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener
     const q = new URLSearchParams({
       action: 'TEMPLATE', text: "Haircut at Clifton's On Main",
       dates: `${ymd}T100000/${ymd}T101500`, ctz: 'America/New_York',
-      details: "You're due for a fresh cut. Call (276) 608-3772 to book.", location: '272 W Main St, Abingdon, VA 24210'
+      details: `You're due for a fresh cut. Call ${SHOP.phone} to book.`, location: SHOP.address
     });
     cal.href = 'https://calendar.google.com/calendar/render?' + q;
     cal.hidden = false; call.hidden = daysOut > 7;
@@ -1013,7 +1028,7 @@ document.querySelectorAll('.service-row').forEach(row => {
       document.body.appendChild(s);
       setTimeout(() => s.remove(), 4200);
     }
-    showToast('Looking fresh already. Call (276) 608-3772 ✂');
+    showToast(`Looking fresh already. Call ${SHOP.phone} ✂`);
   });
 })();
 
@@ -1073,4 +1088,4 @@ document.addEventListener('click', e => {
   document.querySelector('.footer-bottom')?.appendChild(hint);
 })();
 /* Printing adds a scan-to-call QR to the card */
-addEventListener('beforeprint', () => drawQr('printQr', 'tel:+12766083772'));
+addEventListener('beforeprint', () => drawQr('printQr', 'tel:' + SHOP.tel));
