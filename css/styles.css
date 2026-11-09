@@ -979,3 +979,11 @@ section[id], [id="contact"] { scroll-margin-top: calc(var(--nav-h) + 1rem); }
 .reveal-words .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 .reveal-words .word > span { display: inline-block; transform: translateY(105%); transition: transform 0.8s cubic-bezier(.2,.8,.2,1); }
 .reveal-words.is-in .word > span { transform: none; }
+
+/* Film grain over the whole page for a warm, analog barbershop feel */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 400; pointer-events: none;
+  opacity: 0.06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme="dark"] body::after { mix-blend-mode: screen; opacity: 0.04; }
