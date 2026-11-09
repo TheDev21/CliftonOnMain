@@ -124,3 +124,59 @@ document.addEventListener('shopstatus', e => {
   });
 });
 renderStatus();
+
+/* =========================================
+   "REMIND ME TO CALL" — when the shop is closed, offer a
+   calendar reminder (.ics) timed for the next opening.
+   Works with Apple, Google and Outlook calendars, no backend.
+   ========================================= */
+function nextOpeningUTC(st) {
+  // Build the opening moment in New York time, then convert to UTC.
+  const now = new Date();
+  const target = new Date(now.getTime() + st.daysAhead * 86400000);
+  const ymd = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(target);
+  const [y, m, d] = ymd.split('-').map(Number);
+  const h = Math.floor(st.nextOpen / 60), min = st.nextOpen % 60;
+  // Guess UTC by assuming offset, then correct using the real NY offset at that moment.
+  let guess = Date.UTC(y, m - 1, d, h + 5, min);
+  const nyHour = +new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', hour12: false }).format(new Date(guess)) % 24;
+  guess += (h - nyHour) * 3600000;
+  return new Date(guess + 10 * 60000); // 10 minutes after opening
+}
+
+function icsStamp(d) { return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+
+function downloadReminder() {
+  const st = getStatus();
+  if (st.open) { location.href = 'tel:+12766083772'; return; }
+  const start = nextOpeningUTC(st);
+  const end = new Date(start.getTime() + 15 * 60000);
+  const ics = [
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Cliftons On Main//Reminder//EN', 'BEGIN:VEVENT',
+    `UID:${Date.now()}@cliftonsonmain`, `DTSTAMP:${icsStamp(new Date())}`,
+    `DTSTART:${icsStamp(start)}`, `DTEND:${icsStamp(end)}`,
+    'SUMMARY:Call Clifton\'s On Main to book a cut',
+    'DESCRIPTION:Call (276) 608-3772 to book. 272 W Main St\\, Abingdon\\, VA 24210',
+    'LOCATION:272 W Main St\\, Abingdon\\, VA 24210',
+    'BEGIN:VALARM', 'TRIGGER:PT0M', 'ACTION:DISPLAY', 'DESCRIPTION:Call Clifton\'s On Main', 'END:VALARM',
+    'END:VEVENT', 'END:VCALENDAR'
+  ].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+  a.download = 'call-cliftons-on-main.ics';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+document.querySelectorAll('[data-reminder]').forEach(b => b.addEventListener('click', downloadReminder));
+document.addEventListener('shopstatus', e => {
+  const st = e.detail;
+  document.querySelectorAll('[data-reminder], [data-reminder-wrap]').forEach(el => {
+    if (el.closest('[data-reminder-wrap]') && el.matches('[data-reminder]')) return;
+    el.hidden = st.open;
+  });
+  const when = st.open ? '' : st.daysAhead === 0 ? 'today' : st.daysAhead === 1 ? 'tomorrow' : DAY_NAMES[st.nextDay];
+  document.querySelectorAll('[data-reminder-label]').forEach(el => {
+    el.textContent = `Remind me ${when} at ${fmtTime(st.nextOpen || 540)}`;
+  });
+});
+renderStatus();

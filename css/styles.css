@@ -630,3 +630,12 @@ img { display: block; max-width: 100%; }
   .action-bar__btn.is-closed .live-dot { background: #ff6b6b; }
   body { padding-bottom: 90px; }
 }
+
+/* Reminder CTA */
+.btn-reminder { font-family: var(--font-body); }
+.bottom-cta__reminder { margin: 1.5rem auto 0; max-width: 520px; font-size: 0.95rem; color: rgba(255,255,255,0.9); }
+.link-btn {
+  background: none; border: none; padding: 0; cursor: pointer;
+  font: inherit; font-weight: 700; color: #fff;
+  text-decoration: underline; text-underline-offset: 3px;
+}
