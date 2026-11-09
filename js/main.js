@@ -609,3 +609,15 @@ renderStatus();
   }), { threshold: 0.6 });
   els.forEach(el => io.observe(el));
 })();
+
+/* Full-screen menu: light-on-dark header + scroll lock while open */
+hamburger.addEventListener('click', () => {
+  document.body.classList.toggle('menu-locked', menuOpen);
+  nav.classList.toggle('menu-open', menuOpen);
+  nav.classList.toggle('is-top', menuOpen || scrollY < 10);
+});
+document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+  document.body.classList.remove('menu-locked'); nav.classList.remove('menu-open');
+  hamburger.setAttribute('aria-expanded', 'false');
+}));
+renderStatus();

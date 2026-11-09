@@ -1109,3 +1109,35 @@ html, body { overflow-x: clip; }
 .stat strong { display: block; font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1; color: var(--navy); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .stat span { display: block; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.4; }
 @media (max-width: 760px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+
+/* =========================================
+   FULL-SCREEN MOBILE MENU
+   ========================================= */
+@media (max-width: 960px) {
+  .mobile-menu {
+    top: 0; bottom: 0; height: 100dvh; padding: calc(var(--nav-h) + 1rem) 1.5rem 2rem;
+    background: #1c2e4a; border: none; display: flex; flex-direction: column; justify-content: space-between;
+    transform: none; clip-path: circle(0% at calc(100% - 2.2rem) 2.2rem);
+    transition: clip-path 0.6s cubic-bezier(.7,0,.2,1); visibility: hidden;
+  }
+  .mobile-menu.open { clip-path: circle(150% at calc(100% - 2.2rem) 2.2rem); visibility: visible; }
+  .mobile-menu ul { padding: 0; }
+  .mobile-menu .mobile-link:not(.btn) {
+    font-family: var(--font-heading); font-size: clamp(2rem, 9vw, 2.8rem); font-weight: 600; color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 0; display: flex; align-items: baseline; gap: 0.9rem;
+    opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.5s ease, color 0.2s;
+  }
+  .mobile-link small { font-family: var(--font-body); font-size: 0.8rem; color: var(--amber-light); }
+  .mobile-menu.open .mobile-link:not(.btn) { opacity: 1; transform: none; }
+  .mobile-menu.open li:nth-child(2) .mobile-link { transition-delay: 0.05s; }
+  .mobile-menu.open li:nth-child(3) .mobile-link { transition-delay: 0.1s; }
+  .mobile-menu.open li:nth-child(4) .mobile-link { transition-delay: 0.15s; }
+  .mobile-menu.open li:nth-child(5) .mobile-link { transition-delay: 0.2s; }
+  .mobile-menu__foot { display: flex; flex-direction: column; gap: 0.9rem; color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+  .mobile-menu__foot .btn { text-align: center; color: #fff; border-bottom: none; }
+  .mobile-menu__foot .live-status { margin: 0; align-self: flex-start; }
+  .nav:has(+ .mobile-menu.open), .nav.menu-open { background: transparent !important; box-shadow: none; border-color: transparent; }
+  body.menu-locked { overflow: hidden; }
+  body.menu-locked .action-bar { display: none; }
+}
+:root[data-theme="dark"] .mobile-menu { background: #0a111c; }
