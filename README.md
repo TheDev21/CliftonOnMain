@@ -1,41 +1,66 @@
 # Clifton's On Main — Barbershop Website
 
-A professional demo website for **Clifton's On Main**, a barbershop located at 272 W Main St, Abingdon, VA 24210.
+Website for **Clifton's On Main**, a barbershop at 272 W Main St, Abingdon, VA 24210. Built to turn visits into phone calls.
 
-## Live Preview
+Plain HTML, CSS and JavaScript. No framework, no build step, no paid services.
 
-> Open `index.html` in your browser to preview locally, or deploy via GitHub Pages.
+## What it does
 
-## Pages & Sections
+**Gets people to call**
+- Live open/closed status in the shop's own timezone, everywhere on the page (hero, nav, footer, browser tab icon)
+- 20-second booking planner: pick services, day and time, get a one-line script to read on the call. Handles multiple services, Saturday's short day and slots that already passed
+- Mobile action bar (call, directions, status) that adapts to what the visitor picked
+- Desktop scan-to-call and scan-for-directions QR codes
+- Closed? "Remind me to call" adds the next opening to Google, Apple or Outlook calendar
+- "When are you due?" calculator that drops the next cut on the calendar
 
-- **Hero** — Full-screen landing with call-to-action
-- **Services** — Grid layout covering all offered services
-- **About** — Shop background, values, and Google rating callout
-- **Hours** — Full weekly schedule
-- **Contact** — Address, phone, and Google Maps link
-- **Testimonials** — Real customer reviews
-- **Footer CTA** — Phone number booking prompt
+**Builds trust**
+- Google rating, review carousel with highlighted phrases, FAQ, how-a-visit-works timeline
+- Save to contacts (vCard), share sheet, directions in Google Maps, Apple Maps or Waze
 
-## Tech Stack
+**Looks and feels the part**
+- Poster-scale type (Fraunces), barber-pole details, rotating hero headline, scroll reveals
+- Dark mode, full-screen mobile menu, installable app with offline support
 
-- Pure HTML, CSS, JavaScript (no frameworks or dependencies)
-- Google Fonts: Playfair Display + Barlow Condensed
-- Fully responsive (mobile, tablet, desktop)
-- Accessible nav with hamburger menu on mobile
+**Built to be found and maintained**
+- Structured data (BarberShop, FAQ), share card, sitemap
+- Lighthouse: Performance 98 mobile / 99 desktop, Accessibility 100, SEO 100
+- Automated tests for hours, timezones, daylight saving and the planner, run on every push
 
-## Deployment via GitHub Pages
+See **[OWNER_GUIDE.md](OWNER_GUIDE.md)** for updating hours, ad links and call tracking.
 
-1. Push this repo to GitHub
-2. Go to **Settings → Pages**
-3. Set source to `main` branch, root folder
-4. Your site will be live at `https://yourusername.github.io/clifton-on-main`
+## Run it
 
-## Contact Info (Pre-filled)
+Open `index.html` in a browser. For offline mode and the app install, serve it over http:
 
-- **Phone:** (276) 608-3772
-- **Address:** 272 W Main St, Abingdon, VA 24210
-- **Hours:** Mon–Fri 9AM–5PM, Sat 9AM–2PM, Sun Closed
+```bash
+python3 -m http.server 8000
+```
+
+## Test
+
+```bash
+npm install
+npx playwright install chromium
+npm test
+```
+
+## Deploy (GitHub Pages)
+
+Settings → Pages → deploy from the `main` branch, root folder. The site is set up for `https://thedev21.github.io/CliftonOnMain/`; update the canonical and share-image URLs in `index.html` if the address changes.
+
+## Files
+
+```
+index.html            page
+css/styles.css        styles
+js/main.js            all interactive features (SHOP + HOURS config at the top)
+js/vendor/qrcode.js   QR generator (MIT, self-hosted)
+sw.js                 offline support
+tests/                end-to-end tests
+OWNER_GUIDE.md        how to run the site day to day
+```
 
 ---
 
-*Built as a freelance demo. All content sourced from public listings.*
+*Content sourced from public listings. Photos are Unsplash stock placeholders.*
