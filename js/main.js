@@ -822,3 +822,31 @@ document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener
   const note = document.getElementById('holidayNote');
   if (note && (md >= '1120' || md <= '0102')) note.hidden = false;
 })();
+
+/* =========================================
+   DEEP LINKS for ads, texts and QR flyers:
+   ?service=beard&day=tomorrow&time=morning prefills the planner,
+   and the hero headline leads with that service.
+   ========================================= */
+(() => {
+  const q = new URLSearchParams(location.search);
+  const form = document.getElementById('planner');
+  const svc = q.get('service');
+  if (form && svc && SERVICE_LABELS[svc]) {
+    const set = (name, val) => {
+      const r = form.querySelector(`input[name="${name}"][value="${CSS.escape(val)}"]`);
+      if (r && !r.disabled) r.checked = true;
+    };
+    set('service', svc);
+    if (q.get('day')) set('day', q.get('day'));
+    if (q.get('time')) set('time', q.get('time'));
+    form.dispatchEvent(new Event('change'));
+    // hero: start the rotator on the requested service
+    const map = { haircut: 'fades.', beard: 'beard trims.', shave: 'razor shaves.', kids: "kids' cuts.", military: 'military cuts.' };
+    const rot = document.querySelector('[data-rotator]');
+    if (rot && map[svc]) {
+      [...rot.children].forEach(sp => sp.classList.toggle('is-active', sp.textContent === map[svc]));
+      rot.prepend([...rot.children].find(sp => sp.textContent === map[svc]));
+    }
+  }
+})();
