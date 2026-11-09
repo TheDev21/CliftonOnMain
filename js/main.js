@@ -358,3 +358,12 @@ document.querySelectorAll('[data-load-map]').forEach(btn => btn.addEventListener
   f.allowFullscreen = true;
   btn.replaceWith(f);
 }));
+
+/* Smart directions: Apple devices open Apple Maps, everyone else Google Maps */
+(() => {
+  const apple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document;
+  const href = apple
+    ? 'https://maps.apple.com/?daddr=272+W+Main+St,+Abingdon,+VA+24210'
+    : 'https://www.google.com/maps/dir/?api=1&destination=272+W+Main+St,+Abingdon,+VA+24210';
+  document.querySelectorAll('a[href^="https://maps.google.com"]').forEach(a => (a.href = href));
+})();
