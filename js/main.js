@@ -467,3 +467,37 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
   });
   paint();
 })();
+
+/* =========================================
+   WEATHER-AWARE NUDGE — free Open-Meteo API (no key, CORS enabled).
+   Fails silently; cached 30 min per visitor.
+   ========================================= */
+(() => {
+  const el = document.getElementById('heroWeather');
+  if (!el || !window.fetch) return;
+  const render = ({ t, code }) => {
+    const temp = Math.round(t);
+    const rainy = (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || code >= 95;
+    const snowy = (code >= 71 && code <= 77) || code === 85 || code === 86;
+    let line;
+    if (snowy) line = `${temp}° and snowy in Abingdon. Warm shop, hot lather, no rush.`;
+    else if (rainy) line = `${temp}° and raining in Abingdon. Good day to duck into a warm chair.`;
+    else if (temp >= 85) line = `${temp}° in Abingdon. A fresh short cut makes the heat easier.`;
+    else if (temp <= 40) line = `${temp}° in Abingdon. Cold outside, warm in here.`;
+    else line = `${temp}° and nice out in Abingdon. Easy walk down Main Street.`;
+    el.textContent = line;
+    el.hidden = false;
+  };
+  try {
+    const c = JSON.parse(sessionStorage.getItem('wx') || 'null');
+    if (c && Date.now() - c.at < 1800000) return render(c);
+  } catch {}
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=36.7098&longitude=-81.9774&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FNew_York')
+    .then(r => (r.ok ? r.json() : Promise.reject()))
+    .then(d => {
+      const data = { t: d.current.temperature_2m, code: d.current.weather_code, at: Date.now() };
+      try { sessionStorage.setItem('wx', JSON.stringify(data)); } catch {}
+      render(data);
+    })
+    .catch(() => {});
+})();
