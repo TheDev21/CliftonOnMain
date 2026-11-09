@@ -1319,3 +1319,6 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .walkin-card { margin-top: 1rem; padding: 1.25rem; border-radius: 14px; background: var(--light-bg); display: flex; flex-direction: column; gap: 0.75rem; animation: faqIn 0.35s ease; }
 .walkin-card p { font-size: 0.95rem; color: var(--text); }
 .walkin-status { align-self: flex-start; background: #1c2e4a; margin: 0; }
+
+/* Performance: skip rendering work for far-below-the-fold sections until needed */
+.faq-grid, .stats, #reviews, .about-section, .footer { content-visibility: auto; contain-intrinsic-size: auto 700px; }
