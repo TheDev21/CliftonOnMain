@@ -1438,3 +1438,15 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 @media print {
   .ticker, .today-card, .side-index, .scroll-cue, .snip-line, .due, .stats, .steps, .review-ask, .install-btn, .kbd-hint, .print-qr ~ .to-top, .hero__trust li:not(:first-child), .live-status { display: none !important; }
 }
+
+/* Unified warm photo grade so stock photos read as one shop */
+.hero__photo::after, .about-photo-wrap::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+  background: linear-gradient(160deg, rgba(240,168,48,0.35), rgba(28,46,74,0.5));
+}
+.about-photo-wrap { border-radius: var(--radius); }
+.about-photo-wrap::after { border-radius: var(--radius); }
+.about-photo { filter: sepia(0.25) saturate(0.9) contrast(1.05); transition: filter 0.6s ease; }
+.about-photo-wrap:hover .about-photo { filter: none; }
+.hero__photo img { filter: grayscale(0.35) sepia(0.15) contrast(1.08); }
+.badge-spin { z-index: 2; }
