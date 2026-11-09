@@ -1414,3 +1414,10 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
   @keyframes nudge { 30% { transform: translateX(-38px); } 60% { transform: translateX(0); } }
 }
 .planner__hint { margin-top: 0.7rem; font-size: 0.88rem; color: var(--amber-ink); background: rgba(212,131,26,0.08); padding: 0.55rem 0.8rem; border-radius: 10px; }
+.section-intro h2 em { color: var(--amber-ink); font-weight: 600; }
+.snip-line { width: min(320px, 70%); height: 20px; margin: 0.25rem 0 1rem; overflow: visible; }
+.snip-line path, .snip-line circle { fill: none; stroke: var(--amber); stroke-width: 2; stroke-linecap: round; }
+.snip-line > path { stroke-dasharray: 6 6; }
+.snip-line__sc { transform-box: fill-box; animation: snip 2.4s ease-in-out infinite; }
+@keyframes snip { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-14px); } }
+.section-intro .eyebrow { color: var(--amber-ink); font-size: 0.8rem; }
