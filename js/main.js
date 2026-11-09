@@ -1037,3 +1037,7 @@ document.querySelectorAll('.service-row').forEach(row => {
   const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { t.classList.add('is-in-view'); io.disconnect(); } }, { threshold: 0.6 });
   io.observe(t);
 })();
+document.getElementById('planner')?.addEventListener('change', () => {
+  const sat = document.querySelector('#dayChips input:checked')?.dataset.dayidx === '6';
+  const h = document.getElementById('weekendHint'); if (h) h.hidden = !sat;
+});
