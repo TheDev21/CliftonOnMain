@@ -849,3 +849,26 @@ document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener
     }
   }
 })();
+
+/* =========================================
+   CONVERSION EVENTS — pushed to window.dataLayer so any free analytics
+   (GA4 via GTM, Plausible, Umami) can count calls, directions and reminders
+   the moment it's installed. Nothing is sent anywhere until then.
+   ========================================= */
+window.dataLayer = window.dataLayer || [];
+function track(event, detail = {}) {
+  window.dataLayer.push({ event, ...detail, open_now: getStatus().open });
+  if (window.plausible) window.plausible(event, { props: detail });
+}
+document.addEventListener('click', e => {
+  const el = e.target.closest('a, button');
+  if (!el) return;
+  const where = el.closest('section, nav, footer, dialog, .action-bar')?.id || el.closest('section, nav, footer, dialog, .action-bar')?.className.split(' ')[0] || 'page';
+  if (el.matches('a[href^="tel:"]')) track('call_click', { where });
+  else if (el.matches('a[href*="maps"], [data-dir-qr]')) track('directions_click', { where });
+  else if (el.matches('[data-reminder], .reminder-menu *, #dueCal')) track('reminder', { where });
+  else if (el.matches('[data-save-contact]')) track('save_contact', { where });
+  else if (el.matches('[data-share]')) track('share', { where });
+  else if (el.matches('#copyScript, [data-copy-phone]')) track('copy', { where });
+  else if (el.matches('[data-pick-service]')) track('service_pick', { service: el.dataset.pickService });
+});
