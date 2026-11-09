@@ -747,3 +747,56 @@ img { display: block; max-width: 100%; }
 }
 @keyframes stripeSlide { to { background-position: 45.25px 0; } }
 @media (prefers-reduced-motion: reduce) { .scroll-progress span { animation: none; } }
+
+/* =========================================
+   SERVICES — editorial numbered list
+   ========================================= */
+.services-list { border-top: 2px solid var(--navy); }
+.service-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem 3rem 1.1fr 1.6fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  isolation: isolate;
+  transition: color 0.35s ease, padding 0.35s ease;
+}
+.service-row::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: var(--navy);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.45s cubic-bezier(.7,0,.2,1);
+}
+.service-row:hover::before, .service-row:focus-within::before { transform: scaleY(1); }
+.service-row:hover, .service-row:focus-within { color: #fff; padding-left: 1.75rem; }
+.service-row__num { font-family: var(--font-heading); font-size: 1rem; color: var(--amber); font-weight: 600; }
+.service-row__icon { width: 2.2rem; height: 2.2rem; color: var(--amber); }
+.service-row h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  transition: color 0.35s ease;
+}
+.service-row p { font-size: 0.98rem; color: var(--text-muted); transition: color 0.35s ease; }
+.service-row:hover h3, .service-row:focus-within h3 { color: #fff; }
+.service-row:hover p, .service-row:focus-within p { color: rgba(255,255,255,0.75); }
+.service-row__cta {
+  font-weight: 700; font-size: 0.9rem; white-space: nowrap;
+  color: var(--amber);
+  padding: 0.55rem 1rem; border-radius: 999px; border: 1.5px solid currentColor;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.service-row:hover .service-row__cta { background: var(--amber); color: #fff; border-color: var(--amber); }
+@media (max-width: 960px) {
+  .service-row { grid-template-columns: 2.5rem 1fr auto; gap: 0.35rem 1rem; padding: 1.4rem 0.25rem; }
+  .service-row__icon { display: none; }
+  .service-row h3 { grid-column: 2; }
+  .service-row p { grid-column: 2 / 4; grid-row: 2; font-size: 0.93rem; }
+  .service-row__cta { grid-column: 3; grid-row: 1; padding: 0.4rem 0.8rem; font-size: 0.82rem; }
+  .service-row:hover, .service-row:focus-within { padding-left: 0.75rem; }
+}

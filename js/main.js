@@ -36,7 +36,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08 });
 
-document.querySelectorAll('.service-item, .review-card, .info-block').forEach(el => {
+document.querySelectorAll('.service-row, .review-card, .info-block').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(18px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
