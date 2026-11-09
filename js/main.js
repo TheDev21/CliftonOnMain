@@ -995,13 +995,13 @@ document.querySelectorAll('.service-row').forEach(row => {
   }
 })();
 
-/* Easter egg: type "fresh" anywhere and it rains tiny barber poles and scissors */
+/* Easter egg: type "trim" anywhere and it rains tiny barber poles and scissors */
 (() => {
   let buf = '';
   addEventListener('keydown', e => {
     if (e.target.matches('input, textarea, select')) return;
-    buf = (buf + e.key.toLowerCase()).slice(-5);
-    if (buf !== 'fresh' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    buf = (buf + e.key.toLowerCase()).slice(-4);
+    if (buf !== 'trim' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     for (let i = 0; i < 40; i++) {
       const s = document.createElement('span');
       s.className = 'confetti';
