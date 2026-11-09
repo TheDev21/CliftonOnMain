@@ -8,11 +8,35 @@
   "background_color": "#1c2e4a",
   "theme_color": "#1c2e4a",
   "icons": [
-    { "src": "img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    {
+      "src": "img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ],
   "shortcuts": [
-    { "name": "Call to book", "url": "tel:+12766083772" },
-    { "name": "Plan a visit", "url": "./#book" },
-    { "name": "Hours", "url": "./#hours" }
+    {
+      "name": "Call to book",
+      "url": "tel:+12766083772"
+    },
+    {
+      "name": "Plan a visit",
+      "url": "./#book"
+    },
+    {
+      "name": "Hours",
+      "url": "./#hours"
+    }
   ]
 }
