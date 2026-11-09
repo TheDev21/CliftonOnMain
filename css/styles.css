@@ -535,3 +535,57 @@ img { display: block; max-width: 100%; }
   .hero__btns .btn { text-align: center; }
   .footer-inner { flex-direction: column; text-align: center; }
 }
+
+/* =========================================
+   LIVE STATUS
+   ========================================= */
+.live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.85rem 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(6px);
+}
+.live-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #9aa3ad;
+  position: relative;
+}
+.live-status.is-open .live-dot { background: #3ddc84; }
+.live-status.is-open .live-dot::after {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  border: 2px solid #3ddc84; animation: pulse 1.8s ease-out infinite;
+}
+.live-status.is-soon .live-dot { background: var(--amber-light); }
+.live-status.is-soon .live-dot::after { border-color: var(--amber-light); }
+.live-status.is-closed .live-dot { background: #ff6b6b; }
+@keyframes pulse { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+
+.hours-row.is-today {
+  background: rgba(212,131,26,0.1);
+  margin: 0 -0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 6px;
+  border-bottom-color: transparent;
+}
+.hours-row.is-today span:first-child::after {
+  content: 'Today';
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--amber);
+  color: #fff;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+}
