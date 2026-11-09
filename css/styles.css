@@ -1092,3 +1092,12 @@ body::after {
   .hours-row.is-today span:first-child::after { display: none; }
   @page { margin: 1.5cm; }
 }
+
+/* Marquee ticker */
+.ticker { background: var(--amber); color: #fff; overflow: hidden; padding: 1rem 0; transform: rotate(-1.2deg); margin: -1rem -1rem 0; position: relative; z-index: 2; box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+.ticker__track { display: flex; gap: 2rem; width: max-content; animation: ticker 38s linear infinite; align-items: center; }
+.ticker span { font-family: var(--font-heading); font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 600; font-style: italic; white-space: nowrap; }
+.ticker b { font-size: 1.1rem; opacity: 0.7; }
+.ticker:hover .ticker__track { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+html, body { overflow-x: clip; }
