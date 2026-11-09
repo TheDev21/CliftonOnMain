@@ -195,7 +195,32 @@ function downloadReminder() {
   document.body.appendChild(a); a.click(); a.remove();
 }
 
-document.querySelectorAll('[data-reminder]').forEach(b => b.addEventListener('click', downloadReminder));
+/* Reminder chooser: Google Calendar (web, great on Android) or Apple/Outlook (.ics) */
+function reminderStart() {
+  let st = getStatus();
+  if (st.open) for (let i = 1; i < 8; i++) { const d = (st.day + i) % 7; if (HOURS[d]) { st = { ...st, daysAhead: i, nextDay: d, nextOpen: HOURS[d][0] }; break; } }
+  return nextOpeningUTC(st);
+}
+function googleCalUrl() {
+  const s = reminderStart(), e = new Date(s.getTime() + 15 * 60000);
+  const q = new URLSearchParams({
+    action: 'TEMPLATE', text: "Call Clifton's On Main to book a cut",
+    dates: `${icsStamp(s)}/${icsStamp(e)}`,
+    details: 'Call (276) 608-3772 to book.', location: '272 W Main St, Abingdon, VA 24210'
+  });
+  return 'https://calendar.google.com/calendar/render?' + q;
+}
+function openReminderMenu(btn) {
+  document.querySelector('.reminder-menu')?.remove();
+  const menu = document.createElement('div');
+  menu.className = 'reminder-menu';
+  menu.innerHTML = `<a href="${googleCalUrl()}" target="_blank" rel="noopener">Google Calendar</a><button type="button">Apple / Outlook (.ics)</button>`;
+  menu.querySelector('button').addEventListener('click', () => { downloadReminder(); menu.remove(); });
+  menu.querySelector('a').addEventListener('click', () => setTimeout(() => menu.remove(), 100));
+  btn.insertAdjacentElement('afterend', menu);
+  setTimeout(() => document.addEventListener('click', function off(e) { if (!menu.contains(e.target)) { menu.remove(); document.removeEventListener('click', off); } }), 0);
+}
+document.querySelectorAll('[data-reminder]').forEach(b => b.addEventListener('click', () => openReminderMenu(b)));
 document.addEventListener('shopstatus', e => {
   const st = e.detail;
   document.querySelectorAll('[data-reminder], [data-reminder-wrap]').forEach(el => {

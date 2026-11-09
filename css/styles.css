@@ -1172,3 +1172,14 @@ html, body { overflow-x: clip; }
   .steps-list li { padding-left: 4.25rem; }
   .steps-num { position: absolute; left: 0; top: 0; }
 }
+
+/* Reminder chooser */
+.reminder-menu {
+  display: inline-flex; flex-direction: column; gap: 0.25rem; padding: 0.4rem; margin: 0.5rem 0.5rem 0 0; vertical-align: top;
+  background: #fff; border-radius: 12px; box-shadow: 0 14px 40px rgba(0,0,0,0.25); animation: modalIn 0.25s ease; position: relative; z-index: 5;
+}
+.reminder-menu a, .reminder-menu button {
+  font: 600 0.9rem var(--font-body); color: #1c2e4a; text-align: left; padding: 0.6rem 0.9rem; border-radius: 8px;
+  background: none; border: none; cursor: pointer;
+}
+.reminder-menu a:hover, .reminder-menu button:hover { background: #f5f1eb; }
