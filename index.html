@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <script>
+    try { if (sessionStorage.getItem('introSeen') || matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('no-intro'); } catch (e) {}
     try { var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
   <meta charset="UTF-8" />
@@ -53,6 +54,7 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <div class="intro" id="intro" aria-hidden="true"><div class="intro__pole"></div><p class="intro__word">Clifton's<em>on Main</em></p></div>
   <a class="skip-link" href="#book">Skip to booking</a>
 
   <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>

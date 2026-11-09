@@ -746,3 +746,5 @@ renderStatus();
     document.addEventListener('shopstatus', e => paint(e.detail));
   }).catch(() => {});
 })();
+try { sessionStorage.setItem('introSeen', '1'); } catch {}
+setTimeout(() => document.getElementById('intro')?.remove(), 1600);
