@@ -1148,7 +1148,7 @@ html, body { overflow-x: clip; }
 /* Rotating stamp badge on the About photo */
 .about-photo-wrap { position: relative; overflow: visible; }
 .badge-spin { position: absolute; right: -2.5rem; bottom: -2.5rem; width: 150px; height: 150px; }
-.badge-spin text { font: 700 16px var(--font-body); letter-spacing: 4.6px; fill: var(--navy); }
+.badge-spin text { font: 700 15px var(--font-body); letter-spacing: 2.6px; fill: var(--navy); }
 .badge-spin textPath { animation: none; }
 .badge-spin__bg { fill: var(--amber); }
 .badge-spin > text:not(.badge-spin__mid) { transform-origin: 100px 100px; animation: spin 18s linear infinite; }
@@ -1383,3 +1383,13 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .hours-date { font-weight: 400; color: var(--text-muted); font-size: 0.8rem; margin-left: 0.35rem; }
 .confetti { position: fixed; top: -40px; z-index: 600; pointer-events: none; animation: fall linear forwards; }
 @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+/* Barber-stripe section seams: a thin red/white/navy band where dark meets light */
+.about-section, .stats { position: relative; }
+.about-section::before, .footer::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 6px;
+  background: repeating-linear-gradient(-45deg, #c8102e 0 7px, #fff 7px 14px, #1c2e4a 14px 21px, #fff 21px 28px);
+}
+.footer { position: relative; }
+.about-section { clip-path: polygon(0 2.5vw, 100% 0, 100% calc(100% - 2.5vw), 0 100%); padding: calc(5rem + 2.5vw) 0; margin: -1px 0; }
+.about-section::before { top: 2.5vw; transform: skewY(-1.05deg); transform-origin: left top; top: calc(2.5vw - 3px); }
