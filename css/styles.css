@@ -17,7 +17,7 @@
   --border: #ddd8d0;
   --green: #2e7d4f;
 
-  --font-heading: 'Lora', Georgia, serif;
+  --font-heading: 'Fraunces', Georgia, serif;
   --font-body: 'Source Sans 3', system-ui, sans-serif;
 
   --nav-h: 70px;
@@ -234,7 +234,7 @@ img { display: block; max-width: 100%; }
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 620px;
+  max-width: 820px;
   padding: 4rem 2rem 4rem 3rem;
 }
 
@@ -247,9 +247,11 @@ img { display: block; max-width: 100%; }
 
 .hero__heading {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 5vw, 3.75rem);
-  font-weight: 700;
-  line-height: 1.15;
+  font-size: clamp(3rem, 8vw, 6.25rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144;
   color: #fff;
   margin-bottom: 1.25rem;
 }
@@ -290,8 +292,10 @@ img { display: block; max-width: 100%; }
 }
 .section-intro h2 {
   font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
-  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--navy);
   margin-bottom: 0.75rem;
 }
