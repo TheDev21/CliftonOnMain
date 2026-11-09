@@ -1038,3 +1038,16 @@ body::after {
 .to-top__ring { stroke: var(--amber); stroke-dasharray: 131.95; stroke-dashoffset: 131.95; stroke-linecap: round; }
 .to-top span { position: relative; }
 @media (max-width: 960px) { .to-top { bottom: calc(100px + env(safe-area-inset-bottom)); right: 1rem; width: 44px; height: 44px; } }
+
+/* Smart announcement bar */
+.announce {
+  position: fixed; left: 50%; top: calc(var(--nav-h) + 0.75rem); transform: translateX(-50%); z-index: 98;
+  display: flex; align-items: center; gap: 0.75rem; max-width: calc(100% - 1.5rem);
+  background: var(--amber); color: #fff; font-size: 0.9rem; font-weight: 600;
+  padding: 0.5rem 0.6rem 0.5rem 1.1rem; border-radius: 999px; box-shadow: 0 10px 30px rgba(212,131,26,0.35);
+  animation: dropIn 0.6s cubic-bezier(.2,.9,.3,1.2) 1.2s both;
+}
+.announce a { text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.announce__close { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; }
+@keyframes dropIn { from { opacity: 0; transform: translate(-50%, -20px); } }
+@media (max-width: 580px) { .announce { font-size: 0.8rem; width: calc(100% - 1.5rem); border-radius: 14px; } }
