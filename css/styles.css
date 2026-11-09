@@ -1202,3 +1202,9 @@ html, body { overflow-x: clip; }
 .review-ask { margin-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; padding: 1.5rem 1.75rem; border-radius: 18px; border: 1.5px dashed var(--amber); }
 .review-ask p { color: var(--text-muted); max-width: 52ch; }
 .review-ask strong { color: var(--navy); }
+
+/* Hero scroll cue: a tiny razor-thin line that draws downward */
+.scroll-cue { position: absolute; left: 50%; bottom: 2.5rem; z-index: 2; width: 26px; height: 44px; border: 2px solid rgba(255,255,255,0.55); border-radius: 14px; transform: translateX(-50%); }
+.scroll-cue span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; margin-left: -1.5px; border-radius: 2px; background: #fff; animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(16px); } }
+@media (max-width: 960px), (max-height: 700px) { .scroll-cue { display: none; } }
