@@ -909,3 +909,14 @@ document.querySelectorAll('.service-row').forEach(row => {
     row.querySelector('[data-pick-service]')?.click();
   });
 });
+
+/* Hero spotlight: a soft warm light follows the cursor on desktop */
+(() => {
+  const hero = document.querySelector('.hero');
+  if (!hero || isTouch || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect();
+    hero.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    hero.style.setProperty('--my', `${e.clientY - r.top}px`);
+  });
+})();
