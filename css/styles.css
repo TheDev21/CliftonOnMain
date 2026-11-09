@@ -1297,3 +1297,20 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
   .hero__weather { margin: -0.4rem 0 0.9rem; font-size: 0.82rem; }
   .hero__overlay { background: linear-gradient(to top, rgba(20,33,54,0.97) 45%, rgba(28,46,74,0.55) 100%); }
 }
+
+/* =========================================
+   BOTTOM CTA — the phone number as a poster
+   ========================================= */
+.bottom-cta { padding: 6rem 0 5rem; position: relative; overflow: hidden; }
+.bottom-cta::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: repeating-linear-gradient(-45deg, #c8102e 0 10px, #fff 10px 20px, #1c2e4a 20px 30px, #fff 30px 40px); }
+.bottom-cta__eyebrow { font-family: var(--font-heading); font-style: italic; font-size: clamp(1.4rem, 3vw, 2rem); color: #fff; margin-bottom: 0.5rem !important; }
+.bottom-cta__number {
+  display: inline-block; font-family: var(--font-heading); font-weight: 800; color: #fff; line-height: 0.95; letter-spacing: -0.04em;
+  font-size: clamp(3.4rem, 13vw, 10rem); font-feature-settings: "lnum", "tnum"; transition: transform 0.3s ease, color 0.3s ease;
+}
+.bottom-cta__number span { display: inline-block; }
+.bottom-cta__number span:first-child { color: #1c2e4a; }
+.bottom-cta__number:hover { transform: scale(1.02); }
+.bottom-cta__number:hover span:last-child { color: #1c2e4a; }
+.bottom-cta__status { margin: 1.5rem 0 1rem !important; background: rgba(0,0,0,0.12); border-color: rgba(255,255,255,0.35); }
+:root[data-theme="dark"] .bottom-cta__number span:first-child { color: #0f1724; }
