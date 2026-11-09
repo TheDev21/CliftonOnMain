@@ -1023,3 +1023,18 @@ body::after {
 .faq-item p { padding: 0 0 1.4rem; color: var(--text-muted); max-width: 60ch; animation: faqIn 0.35s ease; }
 @keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } }
 @media (max-width: 960px) { .faq-grid { grid-template-columns: 1fr; gap: 1rem; } .faq-item summary { font-size: 1.1rem; } }
+
+/* Back to top with reading-progress ring */
+.to-top {
+  position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 110; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--warm-white); box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: grid; place-items: center;
+  color: var(--navy); font-weight: 700; font-size: 1.1rem;
+  opacity: 0; transform: translateY(20px) scale(0.8); pointer-events: none; transition: all 0.35s ease;
+}
+.to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.to-top svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.to-top__track, .to-top__ring { fill: none; stroke-width: 3; }
+.to-top__track { stroke: var(--border); }
+.to-top__ring { stroke: var(--amber); stroke-dasharray: 131.95; stroke-dashoffset: 131.95; stroke-linecap: round; }
+.to-top span { position: relative; }
+@media (max-width: 960px) { .to-top { bottom: calc(100px + env(safe-area-inset-bottom)); right: 1rem; width: 44px; height: 44px; } }

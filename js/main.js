@@ -548,3 +548,16 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
   };
   tick(); setInterval(tick, 60000);
 })();
+
+/* Back to top ring */
+(() => {
+  const btn = document.getElementById('toTop'), ring = document.getElementById('toTopRing');
+  if (!btn) return;
+  const up = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? scrollY / max : 0;
+    ring.style.strokeDashoffset = 131.95 * (1 - p);
+    btn.classList.toggle('is-visible', scrollY > innerHeight * 1.2);
+  };
+  addEventListener('scroll', up, { passive: true }); up();
+})();
