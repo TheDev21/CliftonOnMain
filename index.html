@@ -232,6 +232,19 @@
     </a>
   </div>
 
+  <!-- CALL MODAL (desktop: scan to call from your phone) -->
+  <dialog class="call-modal" id="callModal" aria-labelledby="callModalTitle">
+    <button class="call-modal__close" type="button" data-close-modal aria-label="Close">×</button>
+    <p class="call-modal__eyebrow">On a computer?</p>
+    <h2 id="callModalTitle">Scan to call from your phone</h2>
+    <div class="call-modal__qr" id="callQr" aria-hidden="true"></div>
+    <a href="tel:+12766083772" class="call-modal__number">(276) 608-3772</a>
+    <div class="call-modal__actions">
+      <button type="button" class="btn btn-primary" data-copy-phone>Copy number</button>
+      <a href="tel:+12766083772" class="btn btn-outline" data-direct-call>Call with this device</a>
+    </div>
+  </dialog>
+
   <script src="js/main.js"></script>
 </body>
 </html>

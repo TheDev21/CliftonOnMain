@@ -180,3 +180,48 @@ document.addEventListener('shopstatus', e => {
   });
 });
 renderStatus();
+
+/* =========================================
+   DESKTOP CALL MODAL — desktop users can't tap tel: links,
+   so show a scannable QR code and a copy button instead.
+   QR library is loaded lazily from cdnjs only when needed.
+   ========================================= */
+const callModal = document.getElementById('callModal');
+const isTouch = matchMedia('(hover: none) and (pointer: coarse)').matches;
+let qrLoaded = false;
+
+function loadQr() {
+  if (qrLoaded) return;
+  qrLoaded = true;
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+  s.onload = () => {
+    const qr = qrcode(0, 'M');
+    qr.addData('tel:+12766083772');
+    qr.make();
+    document.getElementById('callQr').innerHTML = qr.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
+  };
+  s.onerror = () => { document.getElementById('callQr').textContent = '📞'; };
+  document.head.appendChild(s);
+}
+
+if (callModal && !isTouch) {
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="tel:"]');
+    if (!a || a.hasAttribute('data-direct-call')) return;
+    e.preventDefault();
+    loadQr();
+    callModal.showModal();
+  });
+  callModal.addEventListener('click', e => {
+    if (e.target === callModal || e.target.closest('[data-close-modal]')) callModal.close();
+  });
+}
+
+document.querySelectorAll('[data-copy-phone]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('(276) 608-3772'); btn.textContent = 'Copied ✓'; }
+    catch { btn.textContent = '(276) 608-3772'; }
+    setTimeout(() => (btn.textContent = 'Copy number'), 2000);
+  });
+});
