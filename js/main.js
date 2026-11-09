@@ -243,20 +243,24 @@ const callModal = document.getElementById('callModal');
 const isTouch = matchMedia('(hover: none) and (pointer: coarse)').matches;
 let qrLoaded = false;
 
-function loadQr() {
-  if (qrLoaded) return;
-  qrLoaded = true;
+function withQr(cb) {
+  if (window.qrcode) return cb();
   const s = document.createElement('script');
   s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
-  s.onload = () => {
-    const qr = qrcode(0, 'M');
-    qr.addData('tel:+12766083772');
-    qr.make();
-    document.getElementById('callQr').innerHTML = qr.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
-  };
-  s.onerror = () => { document.getElementById('callQr').textContent = '📞'; };
+  s.onload = cb;
+  s.onerror = () => document.querySelectorAll('.call-modal__qr:empty').forEach(el => (el.textContent = '📱'));
   document.head.appendChild(s);
 }
+function drawQr(elId, data) {
+  withQr(() => {
+    const el = document.getElementById(elId);
+    if (!el || el.dataset.done) return;
+    const qr = qrcode(0, 'M'); qr.addData(data); qr.make();
+    el.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
+    el.dataset.done = '1';
+  });
+}
+function loadQr() { drawQr('callQr', 'tel:+12766083772'); }
 
 if (callModal && !isTouch) {
   document.addEventListener('click', e => {
@@ -748,3 +752,17 @@ renderStatus();
 })();
 try { sessionStorage.setItem('introSeen', '1'); } catch {}
 setTimeout(() => document.getElementById('intro')?.remove(), 1600);
+
+/* Copy address + desktop "directions to my phone" QR */
+document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText('272 W Main St, Abingdon, VA 24210'); showToast('Address copied ✓'); } catch {}
+}));
+(() => {
+  const m = document.getElementById('dirModal');
+  if (!m) return;
+  document.querySelectorAll('[data-dir-qr]').forEach(b => b.addEventListener('click', () => {
+    drawQr('dirQr', 'https://www.google.com/maps/dir/?api=1&destination=272+W+Main+St,+Abingdon,+VA+24210');
+    m.showModal();
+  }));
+  m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-close-modal]')) m.close(); });
+})();

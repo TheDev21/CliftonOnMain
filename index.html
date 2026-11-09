@@ -359,6 +359,8 @@
         <div class="contact-actions">
           <button type="button" class="chip-btn" data-save-contact>＋ Save to contacts</button>
           <button type="button" class="chip-btn" data-share>↗ Send to a friend</button>
+          <button type="button" class="chip-btn" data-copy-address>⧉ Copy address</button>
+          <button type="button" class="chip-btn desktop-only" data-dir-qr>▣ Directions to my phone</button>
         </div>
         <div class="map-embed" id="mapEmbed">
           <button type="button" class="map-embed__load" data-load-map>
@@ -498,6 +500,14 @@
       <button type="button" class="btn btn-primary" data-copy-phone>Copy number</button>
       <a href="tel:+12766083772" class="btn btn-outline" data-direct-call>Call with this device</a>
     </div>
+  </dialog>
+
+  <dialog class="call-modal" id="dirModal" aria-labelledby="dirTitle">
+    <button class="call-modal__close" type="button" data-close-modal aria-label="Close">×</button>
+    <p class="call-modal__eyebrow">Heading out?</p>
+    <h2 id="dirTitle">Scan for turn-by-turn directions</h2>
+    <div class="call-modal__qr" id="dirQr" aria-hidden="true"></div>
+    <p class="exit-modal__text">272 W Main St, Abingdon, VA 24210</p>
   </dialog>
 
   <!-- EXIT INTENT (desktop) -->

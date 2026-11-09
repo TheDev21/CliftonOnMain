@@ -1228,3 +1228,4 @@ html, body { overflow-x: clip; }
 @keyframes introOut { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
 .intro { clip-path: inset(0 0 0 0); }
 .no-intro .intro { display: none; }
+@media (hover: none) and (pointer: coarse) { .desktop-only { display: none !important; } }
