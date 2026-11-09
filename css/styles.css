@@ -1314,3 +1314,8 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .bottom-cta__number:hover span:last-child { color: #1c2e4a; }
 .bottom-cta__status { margin: 1.5rem 0 1rem !important; background: rgba(0,0,0,0.12); border-color: rgba(255,255,255,0.35); }
 :root[data-theme="dark"] .bottom-cta__number span:first-child { color: #0f1724; }
+.planner__walkin { margin-top: 1rem; font-size: 0.92rem; color: var(--text-muted); }
+.link-btn--dark { color: var(--navy); }
+.walkin-card { margin-top: 1rem; padding: 1.25rem; border-radius: 14px; background: var(--light-bg); display: flex; flex-direction: column; gap: 0.75rem; animation: faqIn 0.35s ease; }
+.walkin-card p { font-size: 0.95rem; color: var(--text); }
+.walkin-status { align-self: flex-start; background: #1c2e4a; margin: 0; }

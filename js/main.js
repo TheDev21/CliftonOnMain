@@ -880,3 +880,11 @@ document.addEventListener('click', e => {
   else if (el.matches('#copyScript, [data-copy-phone]')) track('copy', { where });
   else if (el.matches('[data-pick-service]')) track('service_pick', { service: el.dataset.pickService });
 });
+
+/* Walk-in path inside the planner */
+document.getElementById('walkinBtn')?.addEventListener('click', () => {
+  const c = document.getElementById('walkinCard');
+  c.hidden = !c.hidden;
+  renderStatus();
+  if (!c.hidden) c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
