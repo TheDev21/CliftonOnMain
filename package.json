@@ -1,0 +1,11 @@
+{
+  "name": "clifton-on-main",
+  "private": true,
+  "description": "Static site for Clifton's On Main barbershop. No build step; tests only.",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}
