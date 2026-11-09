@@ -570,7 +570,7 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
   const st = getStatus();
   let msg = '';
   if (st.open && st.closingSoon) msg = `⏳ Closing in ${fmtDuration(HOURS[st.day][1] - st.mins)}. Call now to get in today.`;
-  else if (st.day === 5 || st.day === 4) msg = '📅 Heads up: Saturdays close at 2 PM and book up fast.';
+  else if (st.day === 5 || st.day === 4) msg = '📅 Heads up: Saturdays close at 2 PM, and appointments are your best bet on weekends.';
   else if (st.day === 6 && st.open) msg = '📅 Short day today: we close at 2 PM.';
   else if (st.day === 0) msg = '😴 Closed Sundays. Line up your Monday cut now.';
   if (!msg) return;
