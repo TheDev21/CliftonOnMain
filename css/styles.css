@@ -1450,3 +1450,18 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .about-photo-wrap:hover .about-photo { filter: none; }
 .hero__photo img { filter: grayscale(0.35) sepia(0.15) contrast(1.08); }
 .badge-spin { z-index: 2; }
+
+/* Mobile QA pass */
+.chips input:checked + span { color: #fff; }
+:root[data-theme="dark"] .chips input:checked + span { color: #111; }
+.footer-phone { white-space: nowrap; }
+@media (max-width: 580px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 1.75rem 1rem; }
+  .footer-col:nth-child(3) { grid-column: 1 / -1; order: -1; }
+  .footer-phone { font-size: 1.9rem; }
+  .bottom-cta { padding: 4.5rem 0 4rem; }
+  .stats-grid { gap: 1.5rem 1rem; }
+  .stat strong { font-size: 2.8rem; }
+  .review-ask { padding: 1.25rem; }
+  .review-ask .btn { width: 100%; text-align: center; }
+}
