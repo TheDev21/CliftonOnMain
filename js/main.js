@@ -522,3 +522,29 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
     if (e.target.name === 'service') try { localStorage.setItem('lastService', e.target.value); } catch {}
   });
 })();
+
+/* =========================================
+   HOURS TIMELINE — each day gets a bar showing its open window,
+   with a live "now" needle on today's row.
+   ========================================= */
+(() => {
+  const START = 7 * 60, END = 19 * 60, span = END - START;
+  const pct = m => `${((m - START) / span) * 100}%`;
+  document.querySelectorAll('.hours-row[data-day]').forEach(row => {
+    const h = HOURS[row.dataset.day];
+    const bar = document.createElement('span');
+    bar.className = 'hours-bar'; bar.setAttribute('aria-hidden', 'true');
+    bar.innerHTML = h ? `<i style="left:${pct(h[0])};width:calc(${pct(h[1])} - ${pct(h[0])})"></i><b class="hours-needle"></b>` : '<b class="hours-needle"></b>';
+    row.appendChild(bar);
+  });
+  const tick = () => {
+    const { day, mins } = shopNow();
+    document.querySelectorAll('.hours-row[data-day]').forEach(row => {
+      const n = row.querySelector('.hours-needle');
+      const show = +row.dataset.day === day && mins >= START && mins <= END;
+      n.style.display = show ? 'block' : 'none';
+      if (show) n.style.left = pct(mins);
+    });
+  };
+  tick(); setInterval(tick, 60000);
+})();

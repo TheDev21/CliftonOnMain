@@ -996,3 +996,11 @@ body::after {
 }
 .welcome-back:hover { background: rgba(240,168,48,0.3); }
 .welcome-back strong { color: var(--amber-light); }
+
+/* Hours timeline bars */
+.hours-row { flex-wrap: wrap; row-gap: 0.4rem; }
+.hours-bar { position: relative; flex-basis: 100%; height: 6px; border-radius: 99px; background: var(--border); }
+.hours-bar i { position: absolute; top: 0; bottom: 0; border-radius: 99px; background: var(--navy); opacity: 0.35; }
+.hours-row.is-today .hours-bar i { background: var(--amber); opacity: 1; }
+.hours-needle { position: absolute; top: -4px; width: 3px; height: 14px; border-radius: 2px; background: #c8102e; transform: translateX(-50%); box-shadow: 0 0 0 2px var(--cream); }
+.hours-needle::after { content: 'now'; position: absolute; top: -1.2rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; font-weight: 700; color: #c8102e; text-transform: uppercase; letter-spacing: 0.06em; }
