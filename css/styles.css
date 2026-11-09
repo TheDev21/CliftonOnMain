@@ -364,7 +364,7 @@ img { display: block; max-width: 100%; }
 }
 .about-photo {
   height: 480px;
-  background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&q=80') center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=900&q=75&auto=format') center/cover no-repeat, linear-gradient(135deg, #2a4166, #14213a);
   border-radius: var(--radius);
 }
 
@@ -1144,3 +1144,15 @@ html, body { overflow-x: clip; }
 .exit-modal__text { color: var(--text-muted); margin: -0.5rem 0 1.5rem; }
 .btn-primary { transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s ease; }
 .btn-primary:hover { box-shadow: 0 12px 28px rgba(212,131,26,0.4); }
+
+/* Rotating stamp badge on the About photo */
+.about-photo-wrap { position: relative; overflow: visible; }
+.badge-spin { position: absolute; right: -2.5rem; bottom: -2.5rem; width: 150px; height: 150px; }
+.badge-spin text { font: 700 16px var(--font-body); letter-spacing: 4.6px; fill: var(--navy); }
+.badge-spin textPath { animation: none; }
+.badge-spin__bg { fill: var(--amber); }
+.badge-spin > text:not(.badge-spin__mid) { transform-origin: 100px 100px; animation: spin 18s linear infinite; }
+.badge-spin__mid { font-size: 40px !important; fill: #fff !important; }
+.badge-spin text { fill: #1c2e4a; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 960px) { .badge-spin { right: 0.75rem; bottom: -2rem; width: 110px; height: 110px; } }
