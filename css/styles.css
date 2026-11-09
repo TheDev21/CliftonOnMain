@@ -1393,3 +1393,12 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .footer { position: relative; }
 .about-section { clip-path: polygon(0 2.5vw, 100% 0, 100% calc(100% - 2.5vw), 0 100%); padding: calc(5rem + 2.5vw) 0; margin: -1px 0; }
 .about-section::before { top: 2.5vw; transform: skewY(-1.05deg); transform-origin: left top; top: calc(2.5vw - 3px); }
+
+/* Desktop side index */
+.side-index { position: fixed; left: 1.25rem; top: 50%; transform: translateY(-50%); z-index: 90; display: flex; flex-direction: column; gap: 0.9rem; opacity: 0; transition: opacity 0.4s ease; }
+.side-index.is-visible { opacity: 1; }
+.side-index a { position: relative; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--text-muted); transition: all 0.25s ease; }
+.side-index a.is-active { background: var(--amber); border-color: var(--amber); transform: scale(1.3); }
+.side-index a::after { content: attr(data-label); position: absolute; left: 1.3rem; top: 50%; transform: translate(-6px, -50%); white-space: nowrap; font-size: 0.75rem; font-weight: 700; color: var(--navy); background: var(--warm-white); padding: 0.2rem 0.55rem; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transition: all 0.2s ease; }
+.side-index a:hover::after, .side-index a:focus-visible::after { opacity: 1; transform: translate(0, -50%); }
+@media (max-width: 1240px) { .side-index { display: none; } }

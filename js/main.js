@@ -1016,3 +1016,18 @@ document.querySelectorAll('.service-row').forEach(row => {
     showToast('Looking fresh already. Call (276) 608-3772 ✂');
   });
 })();
+
+/* Side index: highlights the section in view */
+(() => {
+  const idx = document.querySelector('.side-index');
+  if (!idx) return;
+  const links = [...idx.querySelectorAll('a')];
+  const targets = links.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+  const onScroll = () => {
+    idx.classList.toggle('is-visible', scrollY > innerHeight * 0.6);
+    let cur = 0;
+    targets.forEach((t, i) => { if (t.getBoundingClientRect().top < innerHeight * 0.45) cur = i; });
+    links.forEach((l, i) => l.classList.toggle('is-active', i === cur));
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+})();
