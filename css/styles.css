@@ -1070,3 +1070,25 @@ body::after {
 .footer-wordmark em { font-style: italic; font-weight: 400; color: var(--amber-light); font-size: 0.45em; margin-left: 0.2em; letter-spacing: -0.02em; }
 .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); }
 @media (max-width: 960px) { .footer-top { grid-template-columns: 1fr 1fr; } .footer-wordmark em { display: block; margin: 0.3em 0 0; } }
+
+/* =========================================
+   PRINT — prints as a clean one-page "fridge card"
+   ========================================= */
+@media print {
+  body::after, .nav, .mobile-menu, .action-bar, .to-top, .announce, .scroll-progress, .skip-link,
+  .hero__photo, .hero__overlay, .hero__btns, .hero__weather, .welcome-back, .book-section, .about-photo-wrap,
+  .reviews-nav, .reviews-dots, .map-embed, .contact-actions, .bottom-cta, .footer-wordmark, .service-row__cta,
+  .hours-bar, .call-modal, .btn, .theme-toggle { display: none !important; }
+  * { color: #000 !important; background: none !important; box-shadow: none !important; animation: none !important; }
+  .js-reveal .reveal, .reveal-words .word > span { opacity: 1 !important; transform: none !important; }
+  body { font-size: 11pt; padding: 0; }
+  .hero { min-height: 0; padding: 0; }
+  .hero__content { padding: 0; }
+  .hero__heading { font-size: 28pt; }
+  .section, .about-section, .footer { padding: 12pt 0; }
+  .reviews-track { display: block; }
+  .review-slide { border: 1px solid #999; margin-bottom: 8pt; padding: 10pt; }
+  a[href^="tel:"]::after { content: ''; }
+  .hours-row.is-today span:first-child::after { display: none; }
+  @page { margin: 1.5cm; }
+}
