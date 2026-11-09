@@ -1199,3 +1199,6 @@ html, body { overflow-x: clip; }
 }
 .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 @media (min-width: 961px) { .toast { bottom: 2rem; } }
+.review-ask { margin-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; padding: 1.5rem 1.75rem; border-radius: 18px; border: 1.5px dashed var(--amber); }
+.review-ask p { color: var(--text-muted); max-width: 52ch; }
+.review-ask strong { color: var(--navy); }
