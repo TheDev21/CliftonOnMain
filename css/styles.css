@@ -1229,3 +1229,16 @@ html, body { overflow-x: clip; }
 .intro { clip-path: inset(0 0 0 0); }
 .no-intro .intro { display: none; }
 @media (hover: none) and (pointer: coarse) { .desktop-only { display: none !important; } }
+
+/* =========================================
+   TYPOGRAPHIC REFINEMENT
+   ========================================= */
+h1, h2, h3, .review-slide blockquote, .planner__quote { text-wrap: balance; }
+p, li, figcaption { text-wrap: pretty; }
+body { font-feature-settings: "kern", "liga", "onum"; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+.stat strong, .hours-row span:last-child, .footer-phone, .call-modal__number { font-feature-settings: "lnum", "tnum"; }
+::selection { background: var(--amber); color: #fff; }
+html { scrollbar-color: var(--amber) var(--light-bg); }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--light-bg); }
+::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 99px; border: 3px solid var(--light-bg); }
