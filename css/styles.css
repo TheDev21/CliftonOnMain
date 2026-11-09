@@ -1345,3 +1345,22 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .due-card .eyebrow { color: var(--amber-light); }
 .ticker { color: #1c2e4a; }
 :root[data-theme="dark"] .bottom-cta, :root[data-theme="dark"] .bottom-cta p { color: #1c2e4a; }
+
+/* Hero "Today" glass card (desktop) */
+.today-card {
+  position: absolute; right: clamp(2rem, 6vw, 6rem); top: 50%; transform: translateY(-40%); z-index: 1;
+  width: 300px; padding: 1.75rem; border-radius: 22px; color: #fff;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  animation: floatIn 0.9s cubic-bezier(.2,.8,.2,1) 0.6s both;
+}
+@keyframes floatIn { from { opacity: 0; transform: translateY(-30%); } }
+.today-card__label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--amber-light); font-weight: 700; }
+.today-card__day { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 800; line-height: 1.1; margin-top: 0.4rem; }
+.today-card__hours { font-size: 1.05rem; color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
+.today-card__meter { height: 8px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; margin-bottom: 1rem; }
+.today-card__meter span { display: block; height: 100%; background: repeating-linear-gradient(-45deg, #c8102e 0 6px, #fff 6px 12px); border-radius: 99px; transition: width 0.6s ease; }
+.today-card__status { margin-bottom: 1rem; font-size: 0.78rem; }
+.today-card__link { font-weight: 700; color: #fff; border-bottom: 2px solid var(--amber-light); padding-bottom: 2px; }
+@media (max-width: 1100px) { .today-card { display: none; } }

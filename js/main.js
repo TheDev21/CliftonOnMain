@@ -888,3 +888,15 @@ document.getElementById('walkinBtn')?.addEventListener('click', () => {
   renderStatus();
   if (!c.hidden) c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
+
+/* Today card in the hero: today's hours + how much of the day is left */
+document.addEventListener('shopstatus', e => {
+  const st = e.detail, h = HOURS[st.day];
+  const dayEl = document.getElementById('todayDay');
+  if (!dayEl) return;
+  dayEl.textContent = DAY_NAMES[st.day];
+  document.getElementById('todayHours').textContent = h ? `${fmtTime(h[0])} – ${fmtTime(h[1])}` : 'Closed today';
+  const pct = h ? Math.max(0, Math.min(1, (st.mins - h[0]) / (h[1] - h[0]))) : 1;
+  document.getElementById('todayMeter').style.width = `${pct * 100}%`;
+});
+renderStatus();
