@@ -671,3 +671,27 @@ img { display: block; max-width: 100%; }
 .call-modal__qr svg { width: 100%; height: 100%; }
 .call-modal__number { display: block; font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
 .call-modal__actions { display: flex; flex-direction: column; gap: 0.6rem; }
+
+/* Screen-reader only */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* =========================================
+   HERO ROTATOR
+   ========================================= */
+.hero__rotator {
+  display: inline-grid;
+  color: var(--amber-light);
+  font-style: italic;
+  font-weight: 600;
+}
+.hero__rotator > span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(0.4em) rotateX(-60deg);
+  transform-origin: 50% 100%;
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(.2,.8,.2,1);
+  white-space: nowrap;
+}
+.hero__rotator > span.is-active { opacity: 1; transform: none; }
+.hero__rotator > span.is-leaving { opacity: 0; transform: translateY(-0.4em) rotateX(60deg); }
+.hero__heading-sub { font-size: 0.42em; font-weight: 400; letter-spacing: 0; opacity: 0.85; display: inline-block; margin-top: 0.5rem; }
