@@ -807,3 +807,18 @@ document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener
   if (!bar || !heroBtns || !('IntersectionObserver' in window)) return;
   new IntersectionObserver(([en]) => bar.classList.toggle('is-tucked', en.isIntersecting), { threshold: 0.4 }).observe(heroBtns);
 })();
+
+/* Local time in Abingdon (helps out-of-town visitors) + seasonal holiday note */
+(() => {
+  const el = document.getElementById('localTime');
+  const tick = () => {
+    if (!el) return;
+    const t = new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' });
+    const st = getStatus();
+    el.innerHTML = `It's <strong>${t}</strong> in Abingdon right now. ${st.open ? 'We\'re open.' : 'We\'re closed.'}`;
+  };
+  tick(); setInterval(tick, 30000);
+  const md = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', month: '2-digit', day: '2-digit' }).format(new Date()).replace('-', '');
+  const note = document.getElementById('holidayNote');
+  if (note && (md >= '1120' || md <= '0102')) note.hidden = false;
+})();
