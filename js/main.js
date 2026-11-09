@@ -799,3 +799,11 @@ document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener
   };
   form.addEventListener('change', update); update();
 })();
+
+/* Action bar steps aside while the hero's own call button is on screen,
+   then slides up as soon as it scrolls away: no duplicate CTAs. */
+(() => {
+  const bar = document.getElementById('actionBar'), heroBtns = document.querySelector('.hero__btns');
+  if (!bar || !heroBtns || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(([en]) => bar.classList.toggle('is-tucked', en.isIntersecting), { threshold: 0.4 }).observe(heroBtns);
+})();
