@@ -1051,3 +1051,22 @@ body::after {
 .announce__close { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; }
 @keyframes dropIn { from { opacity: 0; transform: translate(-50%, -20px); } }
 @media (max-width: 580px) { .announce { font-size: 0.8rem; width: calc(100% - 1.5rem); border-radius: 14px; } }
+
+/* =========================================
+   FOOTER — oversized wordmark
+   ========================================= */
+.footer { padding: 4.5rem 0 1.5rem; overflow: hidden; }
+.footer-top { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.footer-col h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--amber-light); margin-bottom: 0.75rem; font-family: var(--font-body); }
+.footer-col p { color: rgba(255,255,255,0.75); margin: 0 0 0.5rem; line-height: 1.6; }
+.footer-col a { display: block; color: #fff; margin-bottom: 0.35rem; transition: color 0.2s ease; }
+.footer-col a:hover { color: var(--amber-light); }
+.footer-phone { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; }
+.live-status--footer { font-size: 0.78rem; margin: 0.5rem 0 0; background: rgba(255,255,255,0.06); }
+.footer-wordmark {
+  font-family: var(--font-heading); font-weight: 800; color: #fff; line-height: 0.85; letter-spacing: -0.04em;
+  font-size: clamp(4rem, 15.5vw, 14rem); margin: 2.5rem 0 1.5rem; white-space: nowrap; opacity: 0.95;
+}
+.footer-wordmark em { font-style: italic; font-weight: 400; color: var(--amber-light); font-size: 0.45em; margin-left: 0.2em; letter-spacing: -0.02em; }
+.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+@media (max-width: 960px) { .footer-top { grid-template-columns: 1fr 1fr; } .footer-wordmark em { display: block; margin: 0.3em 0 0; } }

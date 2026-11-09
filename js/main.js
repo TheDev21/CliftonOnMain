@@ -586,3 +586,5 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }
+document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());
+renderStatus();
