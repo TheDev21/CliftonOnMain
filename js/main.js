@@ -1072,3 +1072,5 @@ document.addEventListener('click', e => {
   hint.innerHTML = 'Shortcuts: <kbd>C</kbd> call · <kbd>B</kbd> book · <kbd>H</kbd> hours · <kbd>D</kbd> directions';
   document.querySelector('.footer-bottom')?.appendChild(hint);
 })();
+/* Printing adds a scan-to-call QR to the card */
+addEventListener('beforeprint', () => drawQr('printQr', 'tel:+12766083772'));
