@@ -1031,3 +1031,9 @@ document.querySelectorAll('.service-row').forEach(row => {
   };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 })();
+(() => {
+  const t = document.getElementById('reviewsTrack');
+  if (!t || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { t.classList.add('is-in-view'); io.disconnect(); } }, { threshold: 0.6 });
+  io.observe(t);
+})();
