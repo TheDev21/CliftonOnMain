@@ -385,9 +385,11 @@ const SERVICE_LABELS = { haircut: "men's haircut", beard: 'beard trim', shave: '
     if (isSat && time === 'afternoon') form.querySelector('input[value="midday"]').checked = true;
     const t = new FormData(form).get('time');
     const when = t === 'any' ? 'whenever you have an opening' : `in the ${t === 'midday' ? 'middle of the day' : t}`;
-    script.textContent = `"Hi, I'd like to book a ${svc} ${dayVal} ${when}."`;
+    const name = (new FormData(form).get('name') || '').trim().replace(/[^\p{L}\s'-]/gu, '');
+    script.textContent = `"Hi, ${name ? `this is ${name}. ` : ''}I'd like to book a ${svc} ${dayVal} ${when}."`;
   };
   form.addEventListener('change', update);
+  form.addEventListener('input', update);
   update();
   document.getElementById('copyScript').addEventListener('click', async e => {
     try { await navigator.clipboard.writeText(script.textContent.replace(/"/g, '')); e.target.textContent = 'Copied ✓'; }
