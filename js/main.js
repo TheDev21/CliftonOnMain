@@ -731,3 +731,18 @@ renderStatus();
     showToast("📞 Calling Clifton's On Main…");
   });
 })();
+
+/* Live favicon: the browser tab shows a green/amber/red dot for open/closing/closed */
+(() => {
+  const link = document.querySelector('link[rel="icon"]');
+  if (!link || !window.fetch || location.protocol === 'file:') return;
+  fetch(link.href).then(r => r.text()).then(svg => {
+    const paint = st => {
+      const color = st.open ? (st.closingSoon ? '#f0a830' : '#3ddc84') : '#ff4d4d';
+      const dotted = svg.replace('</svg>', `<circle cx="52" cy="52" r="11" fill="${color}" stroke="#fff" stroke-width="3"/></svg>`);
+      link.href = 'data:image/svg+xml,' + encodeURIComponent(dotted);
+    };
+    paint(getStatus());
+    document.addEventListener('shopstatus', e => paint(e.detail));
+  }).catch(() => {});
+})();
