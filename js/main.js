@@ -392,3 +392,29 @@ document.querySelectorAll('[data-load-map]').forEach(btn => btn.addEventListener
     setInterval(() => { if (!paused && !document.hidden) go(idx + 1); }, 6000);
   }
 })();
+
+/* Save to contacts (.vcf) — keeps the shop one tap away in the phone's contacts */
+document.querySelectorAll('[data-save-contact]').forEach(b => b.addEventListener('click', () => {
+  const vcf = [
+    'BEGIN:VCARD', 'VERSION:3.0',
+    "FN:Clifton's On Main", "ORG:Clifton's On Main Barbershop",
+    'TEL;TYPE=WORK,VOICE:+12766083772',
+    'ADR;TYPE=WORK:;;272 W Main St;Abingdon;VA;24210;USA',
+    'NOTE:Mon–Fri 9 AM–5 PM\\, Sat 9 AM–2 PM\\, Sun closed. Walk-ins welcome.',
+    'END:VCARD'
+  ].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([vcf], { type: 'text/vcard' }));
+  a.download = 'Cliftons-On-Main.vcf';
+  document.body.appendChild(a); a.click(); a.remove();
+  b.textContent = '✓ Saved';
+}));
+
+/* Send to a friend: native share sheet on phones, copy link elsewhere */
+document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click', async () => {
+  const data = { title: "Clifton's On Main", text: "Good barbershop on Main Street in Abingdon. (276) 608-3772", url: location.href };
+  try {
+    if (navigator.share) await navigator.share(data);
+    else { await navigator.clipboard.writeText(`${data.text} ${data.url}`); b.textContent = '✓ Link copied'; }
+  } catch { /* user dismissed */ }
+}));
