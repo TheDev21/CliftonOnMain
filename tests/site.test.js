@@ -104,3 +104,13 @@ test('every tel: link uses the shop number', () => at('2026-11-10T10:00:00-05:00
   const bad = await p.$$eval('a[href^="tel:"]', as => as.map(a => a.getAttribute('href')).filter(h => h !== 'tel:+12766083772'));
   assert.deepEqual(bad, []);
 }));
+
+test('planner books several services in one sentence', () => at('2026-11-10T10:00:00-05:00', async p => {
+  await p.check('input[name=service][value=kids]', { force: true });
+  const t = await p.textContent('#plannerScript');
+  assert.match(t, /book a men's haircut and a kid's cut today/);
+  // unchecking everything keeps one service selected
+  await p.uncheck('input[name=service][value=kids]', { force: true });
+  await p.click('input[name=service][value=haircut]', { force: true });
+  assert.equal(await p.$$eval('input[name=service]:checked', e => e.length), 1);
+}));

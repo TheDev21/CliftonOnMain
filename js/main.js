@@ -397,7 +397,11 @@ const SERVICE_LABELS = { haircut: "men's haircut", beard: 'beard trim', shave: '
   }
   const update = () => {
     const f = new FormData(form);
-    const svc = SERVICE_LABELS[f.get('service')];
+    // at least one service stays selected
+    if (!f.getAll('service').length) { form.querySelector('input[name="service"]').checked = true; }
+    const picked = new FormData(form).getAll('service').map(v => SERVICE_LABELS[v]);
+    const svc = picked.length === 1 ? picked[0]
+      : picked.slice(0, -1).join(', ') + ' and a ' + picked[picked.length - 1];
     const time = f.get('time');
     const dayVal = f.get('day');
     const isSat = form.querySelector('input[name="day"]:checked')?.dataset.dayidx === '6';
@@ -425,7 +429,7 @@ const SERVICE_LABELS = { haircut: "men's haircut", beard: 'beard trim', shave: '
   // "Book this" on a service pre-selects it in the planner
   document.querySelectorAll('[data-pick-service]').forEach(a => a.addEventListener('click', () => {
     const r = form.querySelector(`input[name="service"][value="${a.dataset.pickService}"]`);
-    if (r) { r.checked = true; update(); }
+    if (r) { form.querySelectorAll('input[name="service"]').forEach(i => (i.checked = i === r)); update(); }
   }));
 })();
 
@@ -582,12 +586,12 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
   try { saved = localStorage.getItem('lastService'); } catch {}
   if (saved && SERVICE_LABELS[saved]) {
     const r = form.querySelector(`input[name="service"][value="${saved}"]`);
-    if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
+    if (r) { form.querySelectorAll('input[name="service"]').forEach(i => (i.checked = i === r)); r.dispatchEvent(new Event('change', { bubbles: true })); }
     wb.innerHTML = `👋 Welcome back. Book your usual <strong>${SERVICE_LABELS[saved]}</strong> →`;
     wb.hidden = false;
   }
   form.addEventListener('change', e => {
-    if (e.target.name === 'service') try { localStorage.setItem('lastService', e.target.value); } catch {}
+    if (e.target.name === 'service' && e.target.checked) try { localStorage.setItem('lastService', e.target.value); } catch {}
   });
 })();
 
@@ -860,6 +864,7 @@ document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener
       const r = form.querySelector(`input[name="${name}"][value="${CSS.escape(val)}"]`);
       if (r && !r.disabled) r.checked = true;
     };
+    form.querySelectorAll('input[name="service"]').forEach(i => (i.checked = false));
     set('service', svc);
     if (q.get('day')) set('day', q.get('day'));
     if (q.get('time')) set('time', q.get('time'));
@@ -964,7 +969,8 @@ document.querySelectorAll('.service-row').forEach(row => {
     if (!visible) { label.textContent = 'Call to book'; return; }
     const f = new FormData(planner);
     const day = f.get('day') || '';
-    label.textContent = `Call · ${SHORT[f.get('service')]} ${day.length > 9 ? day.slice(0, 3) : day}`;
+    const svcs = f.getAll('service');
+    label.textContent = `Call · ${svcs.length > 1 ? svcs.length + ' services' : SHORT[svcs[0]]} ${day.length > 9 ? day.slice(0, 3) : day}`;
   };
   new IntersectionObserver(([en]) => { visible = en.isIntersecting; paint(); }, { threshold: 0.25 }).observe(planner);
   planner.addEventListener('change', paint);
