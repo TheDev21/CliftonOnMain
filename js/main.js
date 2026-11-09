@@ -526,7 +526,8 @@ document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click
    ========================================= */
 (() => {
   const el = document.getElementById('heroWeather');
-  if (!el || !window.fetch) return;
+  const conn = navigator.connection;
+  if (!el || !window.fetch || (conn && (conn.saveData || /2g/.test(conn.effectiveType || '')))) return;
   const render = ({ t, code }) => {
     const temp = Math.round(t);
     const rainy = (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || code >= 95;
@@ -968,4 +969,12 @@ document.querySelectorAll('.service-row').forEach(row => {
     else if (iOS) showToast('Tap Share, then "Add to Home Screen"');
   });
   addEventListener('appinstalled', () => (btn.hidden = true));
+})();
+
+/* Data-saver aware: on Save-Data or 2G, skip the hero photo and weather call */
+(() => {
+  const c = navigator.connection;
+  if (!c || !(c.saveData || /2g/.test(c.effectiveType || ''))) return;
+  document.documentElement.classList.add('save-data');
+  document.querySelector('.hero__photo img')?.remove();
 })();

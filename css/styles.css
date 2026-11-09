@@ -1379,3 +1379,4 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .action-bar__btn--call span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .install-btn { margin-top: 0.9rem; font: 600 0.85rem var(--font-body); color: #fff; background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.4); border-radius: 10px; padding: 0.55rem 0.8rem; cursor: pointer; text-align: left; }
 .install-btn:hover { background: rgba(255,255,255,0.16); }
+.save-data .about-photo { background-image: linear-gradient(135deg, #2a4166, #14213a); }
