@@ -1041,3 +1041,16 @@ document.getElementById('planner')?.addEventListener('change', () => {
   const sat = document.querySelector('#dayChips input:checked')?.dataset.dayidx === '6';
   const h = document.getElementById('weekendHint'); if (h) h.hidden = !sat;
 });
+
+/* In-page links move keyboard/screen-reader focus to the target section */
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || a.getAttribute('href').length < 2) return;
+  const t = document.querySelector(a.getAttribute('href'));
+  if (!t) return;
+  setTimeout(() => {
+    const h = t.matches('h1,h2,h3') ? t : t.querySelector('h1, h2, h3') || t;
+    if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1');
+    h.focus({ preventScroll: true });
+  }, 450);
+});

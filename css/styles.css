@@ -1421,3 +1421,4 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 .snip-line__sc { transform-box: fill-box; animation: snip 2.4s ease-in-out infinite; }
 @keyframes snip { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-14px); } }
 .section-intro .eyebrow { color: var(--amber-ink); font-size: 0.8rem; }
+[tabindex="-1"]:focus { outline: none; }
