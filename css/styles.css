@@ -1465,3 +1465,14 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
   .review-ask { padding: 1.25rem; }
   .review-ask .btn { width: 100%; text-align: center; }
 }
+
+/* Razor shine: a single bright glint sweeps across "Sharp" after load */
+.hero__heading > span[aria-hidden] { position: relative; }
+.hero__shine {
+  background: linear-gradient(100deg, #fff 0 40%, #ffe7b8 47%, #fff 50%, #fff 100%);
+  background-size: 250% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shine 1.6s cubic-bezier(.6,0,.2,1) 1.4s 1 both;
+}
+@keyframes shine { from { background-position: 100% 0; } to { background-position: -40% 0; } }
+@media (prefers-reduced-motion: reduce) { .hero__shine { animation: none; color: #fff; background: none; } }
