@@ -1242,3 +1242,24 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 ::-webkit-scrollbar { width: 11px; }
 ::-webkit-scrollbar-track { background: var(--light-bg); }
 ::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 99px; border: 3px solid var(--light-bg); }
+
+/* Due-date calculator */
+.due { padding: 0 0 6rem; background: var(--light-bg); }
+.due-card { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; background: #1c2e4a; color: #fff; border-radius: 28px; padding: 3rem; position: relative; overflow: hidden; }
+.due-card::after { content: '✂'; position: absolute; right: -1rem; top: -3rem; font-size: 14rem; opacity: 0.05; transform: rotate(-20deg); }
+.due-copy h2 { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.05; margin-bottom: 1rem; }
+.due-note { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+.due-form { display: flex; flex-direction: column; gap: 1rem; position: relative; z-index: 1; }
+.due-form label { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.75); }
+.due-form select {
+  font: 600 1.05rem var(--font-body); color: #fff; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 12px; padding: 0.75rem 1rem; appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23f0a830' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 1rem center;
+}
+.due-form select option { color: #111; }
+.due-result { font-family: var(--font-heading); font-size: 1.3rem; line-height: 1.35; }
+.due-result strong { color: var(--amber-light); }
+.due-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.due-actions .btn-outline { color: #fff; border-color: rgba(255,255,255,0.6); }
+@media (max-width: 860px) { .due-card { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 1.5rem; } }

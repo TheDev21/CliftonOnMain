@@ -262,6 +262,42 @@
     </div>
   </section>
 
+  <!-- DUE DATE -->
+  <section class="due" aria-labelledby="dueTitle">
+    <div class="container due-card">
+      <div class="due-copy">
+        <p class="eyebrow">Never go shaggy again</p>
+        <h2 id="dueTitle">When are you due for a cut?</h2>
+        <p class="due-note">Rule of thumb: fades stay crisp about 2 weeks, classic cuts 3 to 4, beards 1 to 2.</p>
+      </div>
+      <form class="due-form" id="dueForm" onsubmit="return false">
+        <label>I usually get
+          <select name="style">
+            <option value="14">a fade or taper</option>
+            <option value="25" selected>a classic cut</option>
+            <option value="10">a beard trim</option>
+            <option value="28">a military cut</option>
+            <option value="28">a kid's cut</option>
+          </select>
+        </label>
+        <label>My last cut was
+          <select name="ago">
+            <option value="0">this week</option>
+            <option value="7" selected>1 week ago</option>
+            <option value="14">2 weeks ago</option>
+            <option value="21">3 weeks ago</option>
+            <option value="30">a month or more ago</option>
+          </select>
+        </label>
+        <p class="due-result" id="dueResult" aria-live="polite"></p>
+        <div class="due-actions">
+          <a class="btn btn-primary" id="dueCal" target="_blank" rel="noopener">Put it on my calendar</a>
+          <a href="tel:+12766083772" class="btn btn-outline" id="dueCall" hidden>Call now</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="about-section" id="about">
     <div class="container about-grid">

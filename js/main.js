@@ -766,3 +766,36 @@ document.querySelectorAll('[data-copy-address]').forEach(b => b.addEventListener
   }));
   m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-close-modal]')) m.close(); });
 })();
+
+/* =========================================
+   "WHEN AM I DUE?" — rebooking reminder that lands on a real opening day
+   ========================================= */
+(() => {
+  const form = document.getElementById('dueForm');
+  if (!form) return;
+  const out = document.getElementById('dueResult'), cal = document.getElementById('dueCal'), call = document.getElementById('dueCall');
+  const update = () => {
+    const f = new FormData(form);
+    let daysOut = +f.get('style') - +f.get('ago');
+    const { day } = shopNow();
+    if (daysOut <= 0) {
+      out.innerHTML = `<strong>You're due now.</strong> Let's get you in this week.`;
+      cal.hidden = true; call.hidden = false; return;
+    }
+    // land on the closest day the shop is open
+    let d = (day + daysOut) % 7, guard = 0;
+    while (!HOURS[d] && guard++ < 7) { daysOut++; d = (d + 1) % 7; }
+    const date = new Date(Date.now() + daysOut * 86400000);
+    const label = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/New_York' });
+    out.innerHTML = `You're due around <strong>${label}</strong>${daysOut <= 7 ? ' (that\'s soon)' : ''}.`;
+    const ymd = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(date).replace(/-/g, '');
+    const q = new URLSearchParams({
+      action: 'TEMPLATE', text: "Haircut at Clifton's On Main",
+      dates: `${ymd}T100000/${ymd}T101500`, ctz: 'America/New_York',
+      details: "You're due for a fresh cut. Call (276) 608-3772 to book.", location: '272 W Main St, Abingdon, VA 24210'
+    });
+    cal.href = 'https://calendar.google.com/calendar/render?' + q;
+    cal.hidden = false; call.hidden = daysOut > 7;
+  };
+  form.addEventListener('change', update); update();
+})();
