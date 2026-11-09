@@ -169,8 +169,14 @@ function nextOpeningUTC(st) {
 function icsStamp(d) { return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
 
 function downloadReminder() {
-  const st = getStatus();
-  if (st.open) { location.href = 'tel:+12766083772'; return; }
+  let st = getStatus();
+  if (st.open) {
+    // Open right now: remind them at the next day's opening instead.
+    for (let i = 1; i < 8; i++) {
+      const d = (st.day + i) % 7;
+      if (HOURS[d]) { st = { ...st, daysAhead: i, nextDay: d, nextOpen: HOURS[d][0] }; break; }
+    }
+  }
   const start = nextOpeningUTC(st);
   const end = new Date(start.getTime() + 15 * 60000);
   const ics = [
