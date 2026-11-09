@@ -1275,3 +1275,10 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 ::view-transition-new(root) { animation: themeWipe 0.7s cubic-bezier(.7,0,.2,1); }
 @keyframes themeWipe { from { clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0)); } to { clip-path: circle(150vmax at var(--vt-x, 50%) var(--vt-y, 0)); } }
+
+/* Hero trust row */
+.hero__trust { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center; font-size: 0.9rem; color: rgba(255,255,255,0.8); font-weight: 600; }
+.hero__trust .hero__rating { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff; transition: background 0.2s ease; }
+.hero__trust .hero__rating:hover { background: rgba(255,255,255,0.2); }
+.hero__trust strong { color: #f0c040; }
+@media (max-width: 580px) { .hero__trust li:nth-child(4) { display: none; } }
