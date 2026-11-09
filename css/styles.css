@@ -840,3 +840,23 @@ img { display: block; max-width: 100%; }
   .planner { padding: 1.4rem; }
   .planner__actions .btn { flex: 1 1 100%; text-align: center; }
 }
+
+/* Map embed */
+.map-embed {
+  margin-top: 1.75rem; border-radius: 16px; overflow: hidden; height: 260px;
+  background:
+    linear-gradient(rgba(28,46,74,0.55), rgba(28,46,74,0.75)),
+    repeating-linear-gradient(0deg, transparent 0 38px, rgba(255,255,255,0.08) 38px 40px),
+    repeating-linear-gradient(90deg, transparent 0 58px, rgba(255,255,255,0.08) 58px 60px),
+    linear-gradient(135deg, #2a4166, #1c2e4a);
+}
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+.map-embed__load {
+  width: 100%; height: 100%; border: none; cursor: pointer; background: none; color: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem;
+  font-family: var(--font-body); font-size: 0.95rem;
+}
+.map-embed__load strong { font-family: var(--font-heading); font-size: 1.4rem; }
+.map-embed__pin { font-size: 2.2rem; animation: bob 1.6s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-6px); } }
+.map-embed__load:hover span:last-child { text-decoration: underline; }

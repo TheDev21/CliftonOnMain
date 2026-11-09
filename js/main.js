@@ -347,3 +347,14 @@ const SERVICE_LABELS = { haircut: "men's haircut", beard: 'beard trim', shave: '
     if (r) { r.checked = true; update(); }
   }));
 })();
+
+/* Click-to-load Google Map: nothing third-party loads until the visitor asks */
+document.querySelectorAll('[data-load-map]').forEach(btn => btn.addEventListener('click', () => {
+  const f = document.createElement('iframe');
+  f.src = 'https://www.google.com/maps?q=272+W+Main+St,+Abingdon,+VA+24210&z=17&output=embed';
+  f.title = "Map to Clifton's On Main, 272 W Main St, Abingdon VA";
+  f.loading = 'lazy';
+  f.referrerPolicy = 'no-referrer-when-downgrade';
+  f.allowFullscreen = true;
+  btn.replaceWith(f);
+}));
