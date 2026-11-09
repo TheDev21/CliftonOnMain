@@ -978,3 +978,19 @@ document.querySelectorAll('.service-row').forEach(row => {
   document.documentElement.classList.add('save-data');
   document.querySelector('.hero__photo img')?.remove();
 })();
+
+/* Hours table starts from today and shows real dates for the coming week */
+(() => {
+  const table = document.querySelector('.hours-table');
+  if (!table) return;
+  const { day } = shopNow();
+  const rows = [...table.querySelectorAll('.hours-row[data-day]')];
+  for (let i = 0; i < 7; i++) {
+    const d = (day + i) % 7;
+    const row = rows.find(r => +r.dataset.day === d);
+    const date = new Date(Date.now() + i * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+    const first = row.querySelector('span');
+    if (!first.querySelector('.hours-date')) first.insertAdjacentHTML('beforeend', ` <small class="hours-date">${i === 1 ? 'Tomorrow · ' : ''}${date}</small>`);
+    table.appendChild(row);
+  }
+})();
