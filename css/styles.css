@@ -1376,3 +1376,4 @@ html { scrollbar-color: var(--amber) var(--light-bg); }
   background-size: 0% 100%; transition: background-size 1s cubic-bezier(.2,.8,.2,1) 0.3s;
 }
 .review-slide.is-in mark, .review-slide:hover mark, html:not(.js-reveal) .review-slide mark { background-size: 100% 100%; }
+.action-bar__btn--call span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }

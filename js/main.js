@@ -935,3 +935,21 @@ document.querySelectorAll('.service-row').forEach(row => {
     }
   }));
 })();
+
+/* Planner-aware action bar: while the planner is on screen, the call button
+   carries the visitor's request so they know exactly what to say. */
+(() => {
+  const planner = document.getElementById('planner');
+  const label = document.querySelector('.action-bar__btn--call span');
+  if (!planner || !label || !('IntersectionObserver' in window)) return;
+  const SHORT = { haircut: 'haircut', beard: 'beard trim', shave: 'shave', military: 'military cut', kids: "kid's cut", bang: 'bang trim' };
+  let visible = false;
+  const paint = () => {
+    if (!visible) { label.textContent = 'Call to book'; return; }
+    const f = new FormData(planner);
+    const day = f.get('day') || '';
+    label.textContent = `Call · ${SHORT[f.get('service')]} ${day.length > 9 ? day.slice(0, 3) : day}`;
+  };
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; paint(); }, { threshold: 0.25 }).observe(planner);
+  planner.addEventListener('change', paint);
+})();
